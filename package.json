@@ -10,7 +10,7 @@
         "node": ">=14.17.6"
     },
     "scripts": {
-        "develop": "webpack serve --port 9090 --mode development --devtool source-map --inline --content-base .public/ --hot",
+        "develop": "webpack serve --port 9090 --mode development --devtool source-map --hot",
         "build": "webpack --mode production"
     },
     "dependencies": {

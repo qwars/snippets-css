@@ -1,3 +1,4 @@
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
@@ -9,6 +10,7 @@ module.exports = {
     context:  __dirname + '/develop',
     target: 'web',
     devServer: {
+        static: '.public/',
         historyApiFallback: {
             rewrites: [
                 {
