@@ -7,7 +7,7 @@
     "license": "MIT",
     "private": true,
     "engines": {
-        "node": ">=14.16"
+        "node": ">=16.8"
     },
     "scripts": {
         "develop": "webpack serve --port 9090 --mode development --devtool source-map --inline --content-base .public/ --hot",
@@ -25,6 +25,8 @@
         "path-browserify": "^1.0.1"
     },
     "devDependencies": {
+        "@firebase/app-types": "0.x",
+        "@firebase/util": "1.x",
         "css-loader": "^5.2.1",
         "css-minimizer-webpack-plugin": "^2.0.0",
         "file-loader": "^6.2.0",
