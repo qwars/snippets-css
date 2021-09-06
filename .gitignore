@@ -107,3 +107,6 @@ public
 *~
 \#*\#
 .\#*
+
+# Firebase cache
+.firebase/
