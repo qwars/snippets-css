@@ -9,7 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: git submodule update --init --recursive
+        with:
+          ssh-key: ${{ secrets.SUBMODULE_WIDGETS_PULL_KEY }}
+          submodules: 'recursive'
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
