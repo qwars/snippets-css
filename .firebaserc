@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "pages-land"
+  },
+  "targets": {
+    "pages-land": {
+      "hosting": {
+        "snippets-ui": [
+          "snippets-ui"
+        ]
+      }
+    }
+  }
+}
