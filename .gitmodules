@@ -1,0 +1,4 @@
+[submodule "develop/widgets/editor-wysiwyg"]
+	path = develop/widgets/editor-wysiwyg
+	url = git@github.com:qwars/template-ui-kid.git
+	branch = editor-wysiwyg
