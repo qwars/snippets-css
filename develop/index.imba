@@ -20,6 +20,6 @@ Imba.mount <Application route="/:collection*/*:document*/*">
 Imba.mount <header>
 
 Imba.mount <main route="/:collection*/*:document*/*">
-	<span> "guthub.com deploy"
+	<ED>
 
 Imba.mount <footer>
