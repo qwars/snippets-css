@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
+const webpack = require('webpack');
 
 const MetaTags = { author: "Alexandr Selunin; aka.qwars@gmail.com" };
 
@@ -27,7 +28,7 @@ module.exports = {
         maxAssetSize: 1_000_000
     },
     plugins: [
-        new DefinePlugin({
+        new webpack.DefinePlugin({
             'process.env': {
                 APP_API_KEY: JSON.stringify(process.env.APP_API_KEY),
                 APP_AUTH_DOMAIN: JSON.stringify(process.env.APP_AUTH_DOMAIN),
