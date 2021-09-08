@@ -27,7 +27,7 @@ module.exports = {
         maxAssetSize: 1_000_000
     },
     plugins: [
-        DefinePlugin({
+        new DefinePlugin({
             'process.env': {
                 APP_API_KEY: JSON.stringify(process.env.APP_API_KEY),
                 APP_AUTH_DOMAIN: JSON.stringify(process.env.APP_AUTH_DOMAIN),
