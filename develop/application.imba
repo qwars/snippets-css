@@ -5,12 +5,13 @@ import "@firebase/storage"
 
 const Firestore = require './classes/firebase-google-cloud/src'
 
-const apiFirestoreKeys =  process:env:NODE_ENV === 'development' or not process:env:APP_AUTH_DOMAIN ? require( './../firestore-api-key.json' ) : {
+const apiFirestoreKeys =
 	authDomain: process:env:APP_AUTH_DOMAIN
 	projectId: process:env:APP_PROJECT_ID
 	storageBucket: process:env:APP_STORAGE_BUCKET
 	apiKey: process:env:APP_API_KEY
-}
+
+process:env:NODE_ENV === 'development' or not apiFirestoreKeys:apiKey and Object.assign apiFirestoreKeys, require( './../firestore-api-key.json' )
 
 const firestore = Firestore.default.new( apiFirestoreKeys , Imba:commit )
 
