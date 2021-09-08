@@ -29,7 +29,7 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': {
+            'process.env': console.log( require( './firestore-api-key.json' ) ) || {
                 APP_API_KEY: JSON.stringify(process.env.APP_API_KEY),
                 APP_AUTH_DOMAIN: JSON.stringify(process.env.APP_AUTH_DOMAIN),
                 APP_PROJECT_ID: JSON.stringify(process.env.APP_PROJECT_ID),
