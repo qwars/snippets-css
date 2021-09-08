@@ -11,7 +11,7 @@ const apiFirestoreKeys =
 	storageBucket: process:env:APP_STORAGE_BUCKET
 	apiKey: process:env:APP_API_KEY
 
-if process:env:NODE_ENV === 'development' or not apiFirestoreKeys:apiKey then Object.assign apiFirestoreKeys, require( './../firestore-api-key.json' )
+if process:env:NODE_ENV === 'development' or not process:env:APP_API_KEY then Object.assign apiFirestoreKeys, require( './../firestore-api-key.json' )
 
 const firestore = Firestore.default.new( apiFirestoreKeys , Imba:commit )
 
