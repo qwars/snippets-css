@@ -2,3 +2,10 @@
 	path = develop/widgets/editor-wysiwyg
 	url = git@github.com:qwars/template-ui-kid.git
 	branch = editor-wysiwyg
+[submodule "develop/widgets/authentication-firebase"]
+	path = develop/widgets/authentication-firebase
+	url = git@github.com:qwars/template-ui-kid.git
+	branch = authentication-firebase
+[submodule "develop/classes/firebase-google-cloud"]
+	path = develop/classes/firebase-google-cloud
+	url = git@github.com:qwars/firebase-google-cloud.git

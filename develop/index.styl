@@ -1,5 +1,4 @@
 
-
 :root
   --font-text: normal normal 300 normal 13px / normal -apple-system, "Segoe UI", system-ui, Roboto, "Noto Sans", "Helvetica Neue", sans-serfi
   --font-title: normal normal 400 normal 13px / normal -apple-system, "Segoe UI", system-ui, Roboto, "Noto Sans", "Helvetica Neue", sans-serfi
@@ -7,7 +6,7 @@
   --font-mono: normal normal 300 normal 11px / normal SFMono-Regular, Menlo, Monaco, Consolas,  "Nimbus Mono L", "Tlwg Mono", "Ubuntu Mono", "Liberation Mono", "Courier New", monospace
 
 html
-	min-height: 100%
+	min-height: 100vh
 	margin: 0px
 	padding: 0px
 	height: 100%
@@ -16,10 +15,13 @@ body
 	margin: 0px
 	padding: 0px
 	-webkit-font-smoothing: antialiased
-	display: flex
-	flex-direction: column
+	display: grid
+	grid-template-rows: auto 1fr auto
 	min-height: 100vh
 	min-width: 642px
+	font: var( --font-text )
+	& > *
+		place-self: stretch
 	::selection
 		box-shadow: none
 		outline: 0px solid transparent
@@ -30,3 +32,42 @@ body
 	// ::-internal-autofill-selected:focus,
 	// ::-internal-autofill-selected:active
 	// 	background-color: var( --canvas-color,  ) !important
+
+@keyframes spin
+	50%
+		transform: rotateY( 90deg )
+
+.loading
+	display: inline-flex
+	line-height: 0px
+	align-items: center
+	justify-content: center
+	width: 1rem
+	height: 1rem
+	font-size: 1rem
+	&:before
+		content: '\2744'
+		opacity: .1
+		animation: spin 3s linear infinite
+
+.Application
+	box-sizing: border-box
+	bottom: 0px
+	right: 0px
+	left: 0px
+	margin: auto
+	padding: 0px 1rem
+	z-index: 1000
+	background: rgba( 255, 255, 255, .75 )
+	backdrop-filter: blur(2px)
+	position: fixed
+	&.authentication
+		background: var( --canvas-color, Canvas )
+	&.waiting, &.authentication
+		top: 0px
+		display: flex
+		align-items: center
+		justify-content: center
+		min-width: 100vw
+		.loading
+			font-size: 3rem !important
