@@ -5,9 +5,14 @@ import "@firebase/storage"
 
 const Firestore = require './classes/firebase-google-cloud/src'
 
-console.log( 'process:env:NODE_ENV', process:env:NODE_ENV )
+const apiFirestoreKeys =  process:env:NODE_ENV === 'development' ? require( './../firestore-api-key.json' ) : {
+	authDomain: process.env.APP_AUTH_DOMAIN
+	projectId: process.env.APP_PROJECT_ID
+	storageBucket: process.env.APP_STORAGE_BUCKET
+	apiKey: process.env.APP_API_KEY
+}
 
-# const firestore = Firestore.default.new( require( './../firestore-api-key.json' ), Imba:commit )
+const firestore = Firestore.default.new( apiFirestoreKeys , Imba:commit )
 
 import Widget as FormAuthentication from './widgets/authentication-firebase'
 import Authentication from './widgets/authentication-firebase/authentication-class'
@@ -20,8 +25,6 @@ export tag Application < output
 	prop messages default: []
 
 	def setup
-
-		console.dir FormAuthentication
 
 		# Добавляем классу 'authentication' событие получения текущего пользователя
 		authentication:setProfile = do |value|
