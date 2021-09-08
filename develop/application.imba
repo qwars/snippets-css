@@ -5,7 +5,9 @@ import "@firebase/storage"
 
 const Firestore = require './classes/firebase-google-cloud/src'
 
-const firestore = Firestore.default.new( require( './../firestore-api-key.json' ), Imba:commit )
+console.log( 'process:env:NODE_ENV', process:env:NODE_ENV )
+
+# const firestore = Firestore.default.new( require( './../firestore-api-key.json' ), Imba:commit )
 
 import Widget as FormAuthentication from './widgets/authentication-firebase'
 import Authentication from './widgets/authentication-firebase/authentication-class'
