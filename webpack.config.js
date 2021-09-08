@@ -29,11 +29,11 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': console.log( process.env /* require( './firestore-api-key.json' ) */  ) || {
-                APP_API_KEY: JSON.stringify(process.env.APP_API_KEY),
-                APP_AUTH_DOMAIN: JSON.stringify(process.env.APP_AUTH_DOMAIN),
-                APP_PROJECT_ID: JSON.stringify(process.env.APP_PROJECT_ID),
-                APP_STORAGE_BUCKET: JSON.stringify(process.env.APP_STORAGE_BUCKET)
+            'process.env': !process.env.GITHUB_RUN_ID ? require( './firestore-api-key.json' ) : {
+                apiKey: JSON.stringify(process.env.APP_API_KEY),
+                authDomain: JSON.stringify(process.env.APP_AUTH_DOMAIN),
+                projectId: JSON.stringify(process.env.APP_PROJECT_ID),
+                storageBucket: JSON.stringify(process.env.APP_STORAGE_BUCKET)
             }
         }),
         new HtmlWebpackPlugin({
