@@ -27,6 +27,14 @@ module.exports = {
         maxAssetSize: 1_000_000
     },
     plugins: [
+        DefinePlugin({
+            'process.env': {
+                APP_API_KEY: JSON.stringify(process.env.APP_API_KEY),
+                APP_AUTH_DOMAIN: JSON.stringify(process.env.APP_AUTH_DOMAIN),
+                APP_PROJECT_ID: JSON.stringify(process.env.APP_PROJECT_ID),
+                APP_STORAGE_BUCKET: JSON.stringify(process.env.APP_STORAGE_BUCKET)
+            }
+        }),
         new HtmlWebpackPlugin({
             title: 'Konnektu - автоматизация маркетинга :: Платформа создание и продвиженее сайтов',
             favicon: './favicon.ico',
