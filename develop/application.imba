@@ -5,7 +5,7 @@ import "@firebase/storage"
 
 const Firestore = require './classes/firebase-google-cloud/src'
 
-const apiFirestoreKeys =  process:env:NODE_ENV === 'development' ? require( './../firestore-api-key.json' ) : {
+const apiFirestoreKeys =  process:env:NODE_ENV === 'development' or not process:env:APP_AUTH_DOMAIN ? require( './../firestore-api-key.json' ) : {
 	authDomain: process:env:APP_AUTH_DOMAIN
 	projectId: process:env:APP_PROJECT_ID
 	storageBucket: process:env:APP_STORAGE_BUCKET

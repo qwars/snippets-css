@@ -30,7 +30,7 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
-                APP_API_KEY: JSON.stringify(process.env.APP_API_KEY),
+                API_KEY: JSON.stringify(process.env.APP_API_KEY),
                 APP_AUTH_DOMAIN: JSON.stringify(process.env.APP_AUTH_DOMAIN),
                 APP_PROJECT_ID: JSON.stringify(process.env.APP_PROJECT_ID),
                 APP_STORAGE_BUCKET: JSON.stringify(process.env.APP_STORAGE_BUCKET)
