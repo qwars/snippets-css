@@ -29,12 +29,12 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': !process.env.GITHUB_RUN_ID ? require( './firestore-api-key.json' ) : {
+            'process.env.API_KEYS': process.env.GITHUB_RUN_ID ? {
                 apiKey: JSON.stringify(process.env.APP_API_KEY),
                 authDomain: JSON.stringify(process.env.APP_AUTH_DOMAIN),
                 projectId: JSON.stringify(process.env.APP_PROJECT_ID),
                 storageBucket: JSON.stringify(process.env.APP_STORAGE_BUCKET)
-            }
+            } : JSON.stringify( require( './firestore-api-key.json' ) )
         }),
         new HtmlWebpackPlugin({
             title: 'Konnektu - автоматизация маркетинга :: Платформа создание и продвиженее сайтов',

@@ -5,13 +5,7 @@ import "@firebase/storage"
 
 const Firestore = require './classes/firebase-google-cloud/src'
 
-const apiFirestoreKeys =
-	authDomain: process:env:authDomain
-	projectId: process:env:projectId
-	storageBucket: process:env:storageBucket
-	apiKey: process:env:apiKey
-
-const firestore = Firestore.default.new( apiFirestoreKeys , Imba:commit )
+const firestore = Firestore.default.new process:env:API_KEYS, Imba:commit
 
 import Widget as FormAuthentication from './widgets/authentication-firebase'
 import Authentication from './widgets/authentication-firebase/authentication-class'
@@ -32,7 +26,6 @@ export tag Application < output
 			else if value then authentication.emailVerified
 			else @testimony = firestore.destroy and value
 			Imba.commit @waiting = undefined
-
 		# Расширяем теги 'application' - будет доступно из любого тега
 		const datastate = self
 
