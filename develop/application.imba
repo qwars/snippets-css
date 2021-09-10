@@ -65,4 +65,4 @@ export tag Application < output
 	def render
 		<self .authentication=!testimony .waiting=waiting>
 			if waiting then <.loading>
-			elif not testimony then <FormAuthentication@Authentication>
+			elif not testimony then <FormAuthentication@Authentication[ authentication ]>
