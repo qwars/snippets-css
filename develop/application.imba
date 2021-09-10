@@ -7,6 +7,8 @@ const Firestore = require './classes/firebase-google-cloud/src'
 
 const firestore = Firestore.default.new process:env:API_KEYS, Imba:commit
 
+import Sketch as SchemeUI from './scheme-ui' if process:env:NODE_ENV === 'development'
+
 import Widget as FormAuthentication from './widgets/authentication-firebase'
 import Authentication from './widgets/authentication-firebase/authentication-class'
 
@@ -64,7 +66,7 @@ export tag Application < output
 
 	def render
 		<self .authentication=!testimony .waiting=waiting>
-			if process:env:NODE_ENV === 'development' and params:collection === '-' then <.ui> "UI"
+			if process:env:NODE_ENV === 'development' and params:collection === '-' then <SchemeUI route='/-'>
 			else
 				if waiting then <.loading>
 				elif not testimony then <FormAuthentication@Authentication[ authentication ]>

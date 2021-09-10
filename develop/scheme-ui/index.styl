@@ -1,0 +1,43 @@
+#SchemeUI
+	& > h1 > aside
+		flex-direction: row
+	& > nav
+		margin: 1rem 0px
+	& section
+		flex-direction: column
+		& > p
+			display: flex
+			flex-direction: row-reverse
+			grid-gap: 1rem
+			gap: 1rem
+			blockquote
+				border-left: 3px dashed var( --g-color )
+				margin-top: 1rem
+			& > div
+				flex-grow: 1
+				ul > li
+					display: grid
+					grid-template-rows: auto
+					grid-template-columns: auto 1fr auto
+					grid-gap: 1rem
+					gap: 1rem
+					& > span
+						place-self: stretch
+						overflow: hidden
+						text-overflow: ellipsis
+						white-space: nowrap
+						min-width: 100%
+
+#Icons
+	dl
+		display: grid
+		grid-template-columns: 3rem auto
+		align-items: center
+		gap: 1rem
+		abbr
+			height: 3rem
+		dd
+			margin: 0px
+			padding: 0px
+			display: flex
+			gap: 1rem
