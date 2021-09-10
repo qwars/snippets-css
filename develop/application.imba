@@ -64,5 +64,7 @@ export tag Application < output
 
 	def render
 		<self .authentication=!testimony .waiting=waiting>
-			if waiting then <.loading>
-			elif not testimony then <FormAuthentication@Authentication[ authentication ]>
+			if process:env:NODE_ENV === 'development' and params:collection === '-' then <.ui> "UI"
+			else
+				if waiting then <.loading>
+				elif not testimony then <FormAuthentication@Authentication[ authentication ]>
