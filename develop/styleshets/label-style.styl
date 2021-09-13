@@ -14,8 +14,7 @@
 		border-color: var( --focus-color )
 
 [contenteditable][data-placeholder]:empty
-	opacity: .3
-	cursor: text
+	cursor: vat( --text-color )
 	transition: opacity .3s
 	display: inline-block
 	&:focus
@@ -34,23 +33,39 @@ label
 	position: relative
 	align-items: stretch
 	flex-wrap: nowrap
+	flex-direction: row-reverse
 	box-sizing: border-box
 	min-height: 2rem
+	border-left:  var( --border )
+	border-right:  var( --border )
+	transition: background .3s, border-color .3s, color .3s
 	& > legend
 		position: absolute
 		left: 1em
-		transition: top .3s, background .3s,  color .3s
+		font: var( --font-text )
+		transition: top .3s, background .3s,  color .3s, margin-left .3s
 	& > :not(input):not(datalist)
 		display: inline-flex
 		align-items: center
-		&:not(i):first-child
-			margin-right: 1em
+	& > i
+		border-top: var( --border )
+		border-bottom: var( --border )
+		padding-left: 1ex
+		transition: background .3s, border-color .3s, color .3s
+		& + legend
+			margin-left: 1.5rem
+		svg
+			width: 1rem
+			height: 1rem
+			transition: fill .3s
 	input, textarea
 		min-height: 100%
 		align-self: stretch
 		flex-grow: 1
 		font: var( --font-text )
 		border: var( --border )
+		border-left: 0px solid transparent
+		border-right: 0px solid transparent
 		padding: 0px 1em
 		box-sizing: border-box
 		color: var( --text-color )
@@ -113,21 +128,40 @@ label
 			top: 0rem
 			bottom: 0rem
 			height: 2rem
+			color: var( --placeholder-color )
+
+
+		&:placeholder-shown:not(:focus) ~ i svg
+			fill: var( --placeholder-color )
 
 		&:not(:placeholder-shown):not(:focus) ~ legend
 			top: -.6rem
 			background: var( --canvas-color )
+			margin-left: 0px
 
 		&:focus
 			border-color: var( --focus-color )
+			& ~ i
+				border-color: var( --focus-color )
+				& svg
+					fill: var( --focus-color )
 			& ~ legend
 				top: -.6rem
 				background: var( --canvas-color )
+				color: var( --focus-color )
 
 		&:not(:placeholder-shown):invalid, &:focus:not(:placeholder-shown):invalid
 			color: var( --invalid-color )
 			border-color: var( --invalid-color )
 			& ~ legend
 				color: var( --invalid-color )
+
+	&:focus-within
+		border-color: var( --focus-color )
+		legend
+			border-color: var( --focus-color )
+		& > i + legend
+			margin-left: 0px
+
 	textarea
 		padding: .6rem 1em

@@ -1,0 +1,69 @@
+
+#WidgetArticle
+	.code-imba svg
+		width: 5rem
+	.code-imba svg
+		width: 3rem
+	& + .Aside
+		position: absolute
+		right: 0px
+		bottom: 0px
+		top: 2rem
+		width: 0rem
+		border-left: var( --border )
+		padding-left: 1rem
+		box-sizing: border-box
+		opacity: 0
+		transition: width .3s, opacity .3s
+		background: var( --canvas-color )
+		overflow: hidden
+		display: grid
+		grid-template-rows: 1fr
+		& > section
+			padding-right: 2rem
+			overflow: auto
+			align-self: stretch
+		&.active
+			width: 20rem
+			opacity: 1
+			margin: 1rem 0px;
+			box-sizing: border-box;
+		&:before
+			content: ""
+			height: .1rem
+			display: block
+			background: var( --canvas-color )
+			box-shadow: 0px 0px 1rem .5rem var( --canvas-color )
+			position: absolute
+			top: 0px
+			left: 0px
+			right: 0px
+			z-index: 2
+		.CreateSetting
+			z-index: 1
+			display: flex
+			flex-direction: column
+			gap: 1rem
+			height: 0px
+			overflow: hidden
+			transition: height .3s, padding .3s
+			textarea
+				overflow: hidden
+				resize: none
+			label + label
+				flex-grow: 1
+		hr.create-form
+			margin-bottom: 0px
+			& > aside
+				background-color: var( --link-color )
+				kbd
+					color: var( --canvas-color )
+					transform: rotate( 45deg )
+					transition: transform .3s
+			& + section form.CreateSetting
+				margin: 1rem 0px
+				padding-top: 1rem
+				height: 12rem
+				textarea
+					overflow: auto
+					resize: none
