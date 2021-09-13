@@ -5,6 +5,15 @@
   --font-extra: normal normal 300 normal 13px / normal -apple-system, "Segoe UI", system-ui, Roboto, "Noto Sans", "Helvetica Neue", sans-serfi
   --font-mono: normal normal 300 normal 11px / normal SFMono-Regular, Menlo, Monaco, Consolas,  "Nimbus Mono L", "Tlwg Mono", "Ubuntu Mono", "Liberation Mono", "Courier New", monospace
 
+
+@media (prefers-color-scheme: light)
+	@import './styleshets/light-scheme-theme.styl'
+
+@media (prefers-color-scheme: dark)
+	@import './styleshets/dark-scheme-theme.styl'
+
+@import './styleshets/default-tags-style.styl'
+
 html
 	min-height: 100vh
 	margin: 0px

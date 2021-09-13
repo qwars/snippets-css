@@ -9,6 +9,7 @@ const firestore = Firestore.default.new process:env:API_KEYS, Imba:commit
 
 import Widget as FormAuthentication from './widgets/authentication-firebase'
 import Authentication from './widgets/authentication-firebase/authentication-class'
+import Sketch as SchemeUI from './styleshets/scheme-ui'
 
 const authentication = Authentication.new firebase
 
@@ -56,6 +57,9 @@ export tag Application < output
 			message: Messages[ e:message ] or e:message
 
 	# testimony - аутентифицированный пользователь, ссылка на документ с данными пользователя
+	def profile
+		authentication:_profile
+
 	def testimony
 		@testimony
 
@@ -64,7 +68,7 @@ export tag Application < output
 
 	def render
 		<self .authentication=!testimony .waiting=waiting>
-			if process:env:NODE_ENV === 'development' and params:collection === '-' then <.ui> "UI"
+			if process:env:NODE_ENV === 'development' and params:collection === '-' then <SchemeUI>
 			else
 				if waiting then <.loading>
 				elif not testimony then <FormAuthentication@Authentication[ authentication ]>

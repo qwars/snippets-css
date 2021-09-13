@@ -1,0 +1,133 @@
+
+[contenteditable]
+	border: var( --border )
+	cursor: text
+	&:hover:not(:focus):after
+		content: '\270E ...'
+		color: var( --extra-color )
+		font: var( --extra-color )
+		font-size: 1rem
+		line-height: 0%
+		display: inline-block
+		transform: rotate( 180deg ) translate( -1.5ex, -1ex) scale( 1.5 )
+	&:focus
+		border-color: var( --focus-color )
+
+[contenteditable][data-placeholder]:empty
+	opacity: .3
+	cursor: text
+	transition: opacity .3s
+	display: inline-block
+	&:focus
+		opacity: 1
+		&:before
+			opacity: .3
+	&:hover
+		opacity: 1
+	&:before
+		content: attr(data-placeholder)
+		color: var( --extra-color )
+
+
+label
+	display: inline-flex
+	position: relative
+	align-items: stretch
+	flex-wrap: nowrap
+	box-sizing: border-box
+	min-height: 2rem
+	& > legend
+		position: absolute
+		left: 1em
+		transition: top .3s, background .3s,  color .3s
+	& > :not(input):not(datalist)
+		display: inline-flex
+		align-items: center
+		&:not(i):first-child
+			margin-right: 1em
+	input, textarea
+		min-height: 100%
+		align-self: stretch
+		flex-grow: 1
+		font: var( --font-text )
+		border: var( --border )
+		padding: 0px 1em
+		box-sizing: border-box
+		color: var( --text-color )
+		appearance: none
+		-moz-appearance: textfield
+		-webkit-appearance: none
+		-ms-appearance: none
+		-o-appearance: none
+		margin: 0px
+		box-shadow: none
+		transition: background .3s, border-color .3s, color .3s
+
+		&::-webkit-input-placeholder
+			color: var( --placeholder-color )
+		&::-moz-input-placeholder
+			color: var( --placeholder-color )
+		&::-ms-input-placeholder
+			color: var( --placeholder-color )
+		&::input-placeholder
+			color: var( --placeholder-color )
+		&:-webkit-input-placeholder
+			color: var( --placeholder-color )
+		&:-moz-input-placeholder
+			color: var( --placeholder-color )
+		&:-ms-input-placeholder
+			color: var( --placeholder-color )
+		&:input-placeholder
+			color: var( --placeholder-color )
+
+
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button
+			-webkit-appearance: none
+			margin: 0px
+
+		&[type=number]
+			-moz-appearance:textfield
+			text-align: right
+			width: 0px
+			flex-grow: 1
+
+		&[type=checkbox]
+			-moz-appearance:textfield
+			max-width: 1rem
+			max-height: 1rem
+			min-width: 1rem
+			min-height: 1rem
+			padding: 0px
+			align-self: center
+			cursor: pointer
+			transition: background .3s
+			&:checked
+				background: var( --focus-color )
+
+		&:read-only
+			border-color: var( --checked-color )
+			color: var( --checked-color )
+
+		&:placeholder-shown:not(:focus) ~ legend
+			top: 0rem
+			bottom: 0rem
+			height: 2rem
+
+		&:not(:placeholder-shown):not(:focus) ~ legend
+			top: -.6rem
+			background: var( --canvas-color )
+
+		&:focus
+			border-color: var( --focus-color )
+			& ~ legend
+				top: -.6rem
+				background: var( --canvas-color )
+
+		&:not(:placeholder-shown):invalid, &:focus:not(:placeholder-shown):invalid
+			color: var( --invalid-color )
+			border-color: var( --invalid-color )
+			& ~ legend
+				color: var( --invalid-color )
+	textarea
+		padding: .6rem 1em

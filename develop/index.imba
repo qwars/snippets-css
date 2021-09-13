@@ -2,7 +2,7 @@ import './index.styl'
 
 import Widget as ED from './widgets/editor-wysiwyg'
 
-# ISVG = require './images/symbol-icons.svg'
+ISVG = require './images/symbol-icons.svg'
 
 # console.log( process:env:NODE_ENV )
 

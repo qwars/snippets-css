@@ -1,0 +1,188 @@
+
+:root
+	--border: 1px solid var( --border-color )
+
+:not(use):not(.active)[href]
+	cursor: pointer
+
+:not(use).active[href]
+	cursor: default
+
+h1, h2, h3, h4, h5, h6
+	margin: 0px
+	color: var( --title-color )
+	font: var( --font-title )
+	[contenteditable]
+		border: 0px solid transparent
+
+h1, h2
+	display: grid
+	grid-template-columns: 1fr auto
+	font-size: 1.5em
+	& > aside
+		display: flex
+		align-items: center
+	& > dfn
+		grid-area: 2/1/3/3
+
+hr[data-step]
+	display: flex
+	height: 1px
+	align-items: center
+	border: 0px solid transparent
+	background: var( --border-color )
+	overflow: visible
+	padding: 0px 1rem
+	margin: 1.5rem 0px
+	position: relative
+	&:not([open]) + :not(hr)
+		display: none
+
+	& > aside
+		position: absolute
+		right: 0px
+		border: var( --border )
+		height: 1rem
+		min-width: 1rem
+		border-radius: 1rem
+		padding: 0px .5rem
+		margin: 0px 1rem
+		display: flex
+		align-items: center
+		justify-content: center
+		background: var( --canvas-color )
+
+	& > legend
+		background: var( --canvas-color )
+		padding: 0px 1rem
+		font-size: 1rem
+		line-height: 1rem
+		cursor: pointer
+	&:before
+		content: attr(data-step)
+		border: var( --border )
+		height: 1rem
+		min-width: 1rem
+		border-radius: 1rem
+		padding: 0px .5rem
+		margin-right: 1rem
+		display: flex
+		align-items: center
+		justify-content: center
+		background: var( --canvas-color )
+		line-height: 1px
+
+mark
+	background: transparent
+	border: var( --border )
+
+a
+	text-decoration: none
+	color: var( --link-color )
+	&.active, &:active, &.active *, &:active *
+		color: var( --active-color )
+	&.not-active
+		color: var( --link-color )
+	&:not(.active):hover, &:not(.active):hover *,
+	&.not-active:hover, &.not-active:hover *
+		color: var( --hover-color )
+
+.not-active
+	color: var( --link-color ) !important
+
+del
+	text-decoration: none
+
+kbd, .kbd
+	display: inline-flex
+	align-items: center
+	justify-content: center
+	color: var( --extra-color )
+	cursor: pointer
+	transition: color .3s
+	position: relative
+	&:hover
+		color: var( --text-color )
+	&:active, &.active
+		color: var( --title-color )
+	& > svg
+		width: 2rem
+		height: 2rem
+		overflow: visible
+		fill: currentColor
+		pointer-events: none
+		& > use:last-child
+			width: 100%
+			height: 100%
+
+abbr
+	display: inline-flex
+	align-items: center
+	justify-content: center
+
+dfn
+	color: var( --extra-color )
+	font: var( --font-text )
+
+svg
+	overflow: visible
+	width: 100%
+	height: 100%
+
+q
+	margin: 0px 1ex
+	display: inline-block
+
+samp
+	font: var( --font-mono )
+	color: var( --extra-color )
+	& > q
+		quotes: "'" "'"
+
+em
+	font: var( --font-extra )
+	&:not([class]):before
+		content: '🙷'
+		display: inline-block
+		color: var( --border-color )
+		font-size: 1.5rem
+		line-height: 0px
+		margin-right: .5rem
+		transform: translateY(.5rem)
+	&.announcement
+		color: var( --info-color )
+		&:before
+			content: 'ⓘ'
+			display: inline-block
+			font-size: 1.2rem
+			line-height: 0px
+			margin-right: .5rem
+			transform: translateY(.1rem)
+
+	&.warning
+		color: var( --warning-color )
+		&:before
+			content: "🛎"
+			display: inline-block
+			font-size: 1.2rem
+			line-height: 0px
+			margin-right: .5rem
+			transform: translateY(.05rem)
+	&.invalid
+		color: var( --invalid-color )
+		&:before
+			content: '🙹'
+			display: inline-block
+			font-size: 1.2rem
+			line-height: 0px
+			margin-right: .5rem
+			transform: translateY(.05rem)
+
+blockquote
+	margin: 0px
+	padding: 1rem
+
+@import './fieldset-style.styl'
+@import './label-style.styl'
+@import './button-style.styl'
+@import './figure-style.styl'
