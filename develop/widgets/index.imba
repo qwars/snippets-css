@@ -2,6 +2,7 @@
 import './index.styl'
 
 import Aside as ElementAside, Navigation as ElementNavigation, Article as ElementArticle, Header as ElementHeader from './element'
+import Widget as CreateButton from './create-button'
 
 tag ItemFigure < figure
 	def render
@@ -30,6 +31,10 @@ export tag Article < article
 		@count = 0 unless @count
 		@count += 1
 
+	def createNewElement e
+		e.target.waiting = Promise.new do|response|
+			setTimeout(&, 3000) do e.target.waiting = undefined
+
 	def toggleNavigate
 		@nav-active = !@nav-active
 
@@ -41,6 +46,7 @@ export tag Article < article
 					"Widgets"
 				<dfn>
 				<aside>
+					<CreateButton :submit.createNewElement>
 				<blockquote>
 					<kbd :tap.toggleNavigate> <svg:svg> <svg:use href="{ ISVG }#bars">
 					<label>
