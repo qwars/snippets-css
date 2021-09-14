@@ -12,6 +12,30 @@ main
 		grid-area: 1/2/2/3
 		overflow: auto
 		max-height: calc( 100vh - 3.5rem )
+		& > section
+			overflow: auto
+			&:before
+				content: ""
+				display: block
+				margin-bottom: 1rem
+				box-shadow: 0px 0px 1rem .2rem var( --canvas-color )
+				position: sticky
+				top: 0px
+				z-index: 3
+			& > ul
+				margin: 0px
+				padding: 0px
+				display: grid
+				grid-template-columns: repeat( auto-fit, 20rem )
+				grid-auto-rows: 11rem;
+				justify-content: center
+				gap: 1rem
+				& > li
+					list-style: none
+					place-self: stretch
+					position: relative
+					& > figure
+						height: 100%
 
 article
 	display: flex

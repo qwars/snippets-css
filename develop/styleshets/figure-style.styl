@@ -31,6 +31,7 @@ figure
 		opacity: 0
 		transition: opacity .3s
 		z-index: 1
+		cursor: pointer
 		&:before
 			content: "✖"
 			border: 1px solid var( --invalid-color )
@@ -43,7 +44,10 @@ figure
 			display: flex
 			align-items: center
 			justify-content: center
-			line-height: 0px
+			box-sizing: border-box
+			font-size: .7rem
+			padding-left: .05rem
+			padding-bottom: .06rem
 	figcaption
 		display: grid
 		grid-template-rows: 3rem
@@ -68,9 +72,7 @@ figure
 			align-items: center
 
 	&:hover
-		border-color: var( --r-color )
-		box-shadow: 0px 0px 1rem var( --r-color )
+		border-color: var( --select-color )
+		box-shadow: 0px 0px 1rem var( --select-color )
 		& > del
 			opacity: 1
-		figcaption
-			border-top-color: var( --r-color )
