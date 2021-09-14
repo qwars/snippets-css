@@ -9,6 +9,7 @@ button
 	display: flex
 	align-items: center
 	justify-content: center
+	position: relative
 	&:not( :disabled )
 		cursor: pointer
 		&.active
@@ -25,6 +26,14 @@ button
 		&:focus
 			background: var( --focus-color )
 			color: var( --canvas-color )
+		&.waiting
+			background: var( --focus-color )
+			color: var( --canvas-color )
+			&:before
+				content: '\2744'
+				animation: spin 3s linear infinite
+				position: absolute
+				left: .4ex
 
 	&:disabled
 		background: var( --border-color )

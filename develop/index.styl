@@ -35,13 +35,15 @@ body
 	::selection
 		box-shadow: none
 		outline: 0px solid transparent
+		background: var( --select-color )
+		color: white
 	:focus
 		box-shadow: none
 		outline: 0px solid transparent
-	// ::-internal-autofill-selected:hover,
-	// ::-internal-autofill-selected:focus,
-	// ::-internal-autofill-selected:active
-	// 	background-color: var( --canvas-color,  ) !important
+	::-internal-autofill-selected:hover,
+	::-internal-autofill-selected:focus,
+	::-internal-autofill-selected:active
+		background-color: var( --canvas-color,  ) !important
 
 @keyframes spin
 	50%

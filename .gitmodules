@@ -9,3 +9,7 @@
 [submodule "develop/classes/firebase-google-cloud"]
 	path = develop/classes/firebase-google-cloud
 	url = git@github.com:qwars/firebase-google-cloud.git
+[submodule "develop/widgets/codemirror"]
+	path = develop/widgets/codemirror
+	url = git@github.com:qwars/template-ui-kid.git
+	branch = CodeMirror5

@@ -1,5 +1,12 @@
 
 #WidgetArticle
+	& > section
+		position: relative
+		height: 0px
+		z-index: 1
+		margin-right: -1rem
+		& > .imba-codemirror, & > .imba-codemirror .CodeMirror
+			height: 100%
 	.code-imba svg
 		width: 5rem
 	.code-imba svg
@@ -19,15 +26,22 @@
 		overflow: hidden
 		display: grid
 		grid-template-rows: 1fr
+		z-index: 0
 		& > section
+			width: 18rem
 			padding-right: 2rem
-			overflow: auto
+			overflow: hidden
 			align-self: stretch
+			display: flex
+			flex-direction: column
 		&.active
 			width: 20rem
 			opacity: 1
 			margin: 1rem 0px;
 			box-sizing: border-box;
+			z-index: 2
+			& > section
+				overflow: auto
 		&:before
 			content: ""
 			height: .1rem
