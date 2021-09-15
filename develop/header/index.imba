@@ -16,6 +16,7 @@ export tag Sketch < header
 				<a route-to="/projects"> "Projects"
 				<a route-to="/templates"> "Templates"
 				<a route-to="/widgets"> "Widgets"
+				<s>
 				<a route-to="/store">
 					<div>
 						<a route-to="/store/projects"> "Projects"
