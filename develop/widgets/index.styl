@@ -1,154 +1,47 @@
 
-#WidgetArticle
-	& > section
-		position: relative
-		height: 0px
-		z-index: 1
-		margin-right: -1rem
-		& > .imba-codemirror, & > .imba-codemirror .CodeMirror
-			height: 100%
-		&.list-state
-			display: grid
-			grid-template-rows: 1fr
-			grid-template-columns: auto 1fr
-			align-items: stretch
-			overflow: hidden
-			& > nav
-				display: grid
-				grid-template-rows: 1fr
-				grid-template-columns: 1fr
-				align-items: stretch
-				position: relative
-				box-sizing: border-box
-				overflow: hidden
-				padding-right: 2rem
-				border-right: var( --border )
-				margin-left: 0px
-				width: 17rem
-				transition: width .3s, margin-left .3s
-				&:not(.active)
-					width: 0px
-					margin-left: -3rem
-				.trash-folder
-					align-self: flex-end
-					display: flex
-					align-items: center
-					gap: 1rem
-					& aside
-						display: flex
-						align-items: center
-						gap: 1ex
-					kbd svg, del svg
-						width: 1rem
-						height: 1rem
-					& > span
-						flex-grow: 1
-						width: 0px
-						text-overflow: ellipsis
-						overflow: hidden
-						white-space: nowrap
-				ul
-					margin: 0px
-					padding: 1rem 0px
-					margin-right: -2rem
-					padding-right: 1rem
-					overflow: auto
-					display: flex
-					flex-direction: column
-					gap: 1rem
-					&:empty
-						display: none
-					& > li
-						display: flex
-						align-items: center
-						gap: 1rem
-						& aside
-							display: flex
-							align-items: center
-						kbd svg, del svg
-							width: 1rem
-							height: 1rem
-						& > span
-							flex-grow: 1
-							width: 0px
-							text-overflow: ellipsis
-							overflow: hidden
-							white-space: nowrap
-			& > ul
-				overflow: auto
-	.code-imba svg
-		width: 5rem
-	.code-imba svg
-		width: 3rem
-	& + .Aside
-		position: absolute
-		right: 0px
-		bottom: 0px
-		top: 2rem
-		width: 0rem
-		border-left: var( --border )
-		padding-left: 1rem
-		box-sizing: border-box
-		opacity: 0
-		transition: width .3s, opacity .3s
-		background: var( --canvas-color )
+.imba-codemirror
+	grid-area: 1/2/2/3
+	place-self: stretch
+	display: grid
+	grid-template-columns: 1fr
+	grid-template-rows: 1fr
+	box-sizing: border-box
+	position: relative
+	overflow: auto
+	.CodeMirror
+		min-height: 100%
+		.CodeMirror-hscrollbar
+			visibility: hidden
+.code-imba svg
+	width: 5rem
+.code-imba svg
+	width: 3rem
+
+.CreateSetting
+	z-index: 1
+	display: flex
+	flex-direction: column
+	gap: 1rem
+	height: 0px
+	overflow: hidden
+	transition: height .3s, padding .3s
+	textarea
 		overflow: hidden
-		display: grid
-		grid-template-rows: 1fr
-		z-index: 0
-		&:empty
-			display: none
-		& > section
-			width: 18rem
-			padding-right: 2rem
-			overflow: hidden
-			align-self: stretch
-			display: flex
-			flex-direction: column
-		&.active
-			width: 20rem
-			opacity: 1
-			margin: 1rem 0px;
-			box-sizing: border-box;
-			z-index: 2
-			& > section
-				overflow: auto
-		&:before
-			content: ""
-			height: .1rem
-			display: block
-			background: var( --canvas-color )
-			box-shadow: 0px 0px 1rem .5rem var( --canvas-color )
-			position: absolute
-			top: 0px
-			left: 0px
-			right: 0px
-			z-index: 2
-		.CreateSetting
-			z-index: 1
-			display: flex
-			flex-direction: column
-			gap: 1rem
-			height: 0px
-			overflow: hidden
-			transition: height .3s, padding .3s
-			textarea
-				overflow: hidden
-				resize: none
-			label + label
-				flex-grow: 1
-		hr.create-form
-			margin-bottom: 0px
-			& > aside
-				background-color: var( --link-color )
-				kbd
-					color: var( --canvas-color )
-					transform: rotate( 45deg )
-					transition: transform .3s
-			& + section form.CreateSetting
-				margin: 1rem 0px
-				padding-top: 1rem
-				height: 12rem
-				textarea
-					overflow: auto
-					resize: none
+		resize: none
+	label + label
+		flex-grow: 1
+hr.create-form
+	margin-bottom: 0px
+	& > aside
+		background-color: var( --link-color )
+		kbd
+			color: var( --canvas-color )
+			transform: rotate( 45deg )
+			transition: transform .3s
+	& + section form.CreateSetting
+		margin: 1rem 0px
+		padding-top: 1rem
+		height: 12rem
+		textarea
+			overflow: auto
+			resize: none

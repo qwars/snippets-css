@@ -39,14 +39,14 @@ export tag Article < article
 		@nav-active = !@nav-active
 
 	def render
-		<self#WidgetArticle>
+		<self>
 			unless params:document then <h2>
 				<span>
 					<kbd :tap.createNewFolder> <svg:svg> <svg:use href="{ ISVG }#folder-plus">
 					"Widgets"
 				<dfn>
 				<aside>
-					<CreateButton :submit.createNewElement>
+					<CreateButton :submit.createNewElement placeholder="widget">
 				<blockquote>
 					<kbd :tap.toggleNavigate> <svg:svg> <svg:use href="{ ISVG }#bars">
 					<label>
