@@ -17,3 +17,7 @@
 	path = develop/widgets/create-button
 	url = git@github.com:qwars/template-ui-kid.git
 	branch = create-button
+[submodule "develop/widgets/details-tooltype"]
+	path = develop/widgets/details-tooltype
+	url = git@github.com:qwars/template-ui-kid.git
+	branch = details-tooltype

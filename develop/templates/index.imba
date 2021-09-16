@@ -14,7 +14,7 @@ tag ItemFigure < figure
 export tag Navigation < nav
 	def render
 		<self>
-			if params:document then <ElementNavigation route="/widgets/:document">
+			if params:document then <ElementNavigation route="/templates/:document">
 export tag Aside < aside
 	def render
 		<self>

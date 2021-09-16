@@ -134,6 +134,9 @@ label
 		&:placeholder-shown:not(:focus) ~ i svg
 			fill: var( --placeholder-color )
 
+		&:not(:placeholder-shown) ~ i svg
+			fill: var(--active-color)
+
 		&:not(:placeholder-shown):not(:focus) ~ legend
 			top: -.6rem
 			background: var( --canvas-color )
