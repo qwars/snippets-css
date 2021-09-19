@@ -1,6 +1,13 @@
 
 import Widget as Details from '../widgets/details-tooltype'
 import Widget as ColorsHue from '../widgets/editor-wysiwyg/colors-collection/colors-hue'
+import CSSLayerSettings,
+	CSSBlockSettings,
+	CSSGridSettings,
+	CSSFontSettings,
+	CSSTextSettings,
+	CSSTransactionSettings
+	from '../widgets/styleshets-settings'
 
 tag ItemLiFolders < li
 	def render
@@ -106,19 +113,19 @@ export tag Article < section
 							<legend> "Properties"
 						<hr data-step="🅖" open=true>
 							<legend> "Grid position"
+						<CSSGridSettings>
 						<hr data-step="🅕" open=true>
 							<legend> "Fonts state"
+						<CSSFontSettings>
 						<hr data-step="🅕" open=true>
 							<legend> "Text settings"
+						<CSSTextSettings>
 						<hr data-step="🅣" open=true>
 							<legend> "Transaction settings"
+						<CSSTransactionSettings>
 						<hr data-step="🅑" open=true>
 							<legend> "Block settings"
-						<section>
-							<div> for item in Array 5
-								<kbd> <svg:svg> <svg:use href="{ ISVG }#cog">
+						<CSSBlockSettings>
 						<hr data-step="🅛" open=true>
 							<legend> "Layer settings"
-						<section>
-							<div> for item in Array 5
-								<kbd> <svg:svg> <svg:use href="{ ISVG }#cog">
+						<CSSLayerSettings>

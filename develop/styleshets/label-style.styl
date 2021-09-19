@@ -47,9 +47,9 @@ label
 	& > :not(input):not(datalist)
 		display: inline-flex
 		align-items: center
-	& > i
-		border-top: var( --border )
-		border-bottom: var( --border )
+	& > i, & > u
+		border-top: var( --border ) !important
+		border-bottom: var( --border )  !important
 		padding-left: 1ex
 		transition: background .3s, border-color .3s, color .3s
 		& + legend
@@ -58,6 +58,10 @@ label
 			width: 1rem
 			height: 1rem
 			transition: fill .3s
+	& input +  u
+		border: 1px solid var(--border-color) !important
+		border-left: none !important
+		border-right: none !important
 	input, textarea
 		min-height: 100%
 		align-self: stretch
@@ -144,8 +148,8 @@ label
 
 		&:focus
 			border-color: var( --focus-color )
-			& ~ i
-				border-color: var( --focus-color )
+			& ~ i, & ~ u
+				border-color: var( --focus-color ) !important
 				& svg
 					fill: var( --focus-color )
 			& ~ legend

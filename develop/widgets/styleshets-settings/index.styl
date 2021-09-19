@@ -1,0 +1,107 @@
+
+.input-units input
+	font: var( --font-text )
+	border: var( --border )
+	border-left: 0px solid transparent
+	border-right: 0px solid transparent
+
+[href*="empty-settings"]
+	opacity: .3
+
+.CSSLayerSettings, .CSSBlockSettings
+	display: flex
+	flex-direction: column
+	gap: 1rem
+	& > nav
+		display: flex
+		gap: 1rem
+		align-items: center
+		justify-content: space-evenly
+	& > section:not(.active)
+		display: none
+
+
+.CSSGridSettings
+	display: grid
+	grid-template-rows: auto auto
+	grid-template-columns: .5fr .5fr auto
+	gap: 1rem
+	& > kbd
+		flex-direction: row-reverse
+		svg + svg
+			pointer-events: all
+			width: 1.5rem
+			height: 1.5rem
+	& > span
+		display: flex
+		align-items: center
+		gap: 1ex
+		label
+			flex-grow: 1
+		i > svg
+			width: 2rem
+			height: 2rem
+			fill: var( --disabled-color)
+
+.CSSFontSettings
+	display: flex
+	flex-direction: column
+	gap: 1rem
+	details
+		ol
+			margin: 0px
+			padding: 0px 1rem
+			list-style: none
+			display: flex
+			gap: 1rem
+			flex-direction: column
+			li
+				cursor: pointer
+				&.active
+					background: var( --select-color )
+					color: white
+		summary
+			align-items: center
+			gap: .5ex
+			font-size: 1.2rem
+	& > :first-child
+		display: flex
+		align-items: center
+		gap: 1ex
+		& > span:not(.active)
+			color: var( --extra-color )
+		& > aside
+			flex-grow: 1
+			display: flex
+			gap: 1ex
+			justify-content: flex-end
+	& > :last-child
+		display: grid
+		grid-template-columns: .5fr .5fr auto
+		gap: 1rem
+		& > span
+			display: flex
+			align-items: center
+			justify-content: center
+			gap: 1ex
+			label
+				flex-grow: 1
+				min-width: 10ex
+		i > svg
+			width: 2rem
+			height: 2rem
+			fill: var( --disabled-color)
+
+.CSSTextSettings
+	display: flex
+	flex-direction: column
+	gap: 1rem
+	& > :first-child
+		display: flex
+		align-items: center
+		& aside
+			display: flex
+			align-items: center
+			justify-content: flex-end
+			flex-grow: 1
+			gap: 1ex
