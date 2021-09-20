@@ -17,11 +17,11 @@ export tag Sketch < header
 				<a route-to="/templates"> "Templates"
 				<a route-to="/widgets"> "Widgets"
 				<s>
-				<a route-to="/store">
+				<a route-to="/stores">
 					<div>
-						<a route-to="/store/projects"> "Projects"
-						<a route-to="/store/templates"> "Templates"
-						<a route-to="/store/widgets"> "Widgets"
+						<a route-to="/stores/projects"> "Projects"
+						<a route-to="/stores/templates"> "Templates"
+						<a route-to="/stores/widgets"> "Widgets"
 					<span> "Store"
 			<aside>
 				<a route-to="/office">

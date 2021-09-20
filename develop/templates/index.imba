@@ -38,7 +38,7 @@ export tag Article < article
 		@nav-active = !@nav-active
 
 	def render
-		<self#TemplateArticle>
+		<self>
 
 			unless params:document then <h2>
 				<span>
