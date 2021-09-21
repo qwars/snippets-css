@@ -34,10 +34,7 @@ export tag Header < h2
 
 	def render
 		<self>
-			<span>
-				<kbd>
-					<svg:svg> <svg:use href="{ ISVG }#image">
-				<span contenteditable=true data-placeholder="Enter widget name">
+			<span> <span contenteditable=true data-placeholder="Enter widget name">
 			<dfn> <span contenteditable=true data-placeholder="Enter widget description">
 			<aside>
 				if codemirror

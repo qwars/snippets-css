@@ -19,6 +19,6 @@ export tag Sketch < main
 			<ProjectsNavigation route="/projects/*:document*/*">
 			<ProjectsArticle route="/projects/*:document*/*">
 			<ProjectsAside route="/projects/*:document*/*">
-			<StoresNavigation route="/stores/*:document*/*">
-			<StoresArticle route="/stores/*:document*/*">
-			<StoresAside route="/stores/*:document*/*">
+			<StoresNavigation route="/stores/*:part*/*:document*/*">
+			<StoresArticle route="/stores/*:part*/*:document*/*">
+			<StoresAside route="/stores/*:part*/*:document*/*">

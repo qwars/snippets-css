@@ -21,3 +21,7 @@
 	path = develop/widgets/details-tooltype
 	url = git@github.com:qwars/template-ui-kid.git
 	branch = details-tooltype
+[submodule "develop/widgets/carusel-images"]
+	path = develop/widgets/carusel-images
+	url = git@github.com:qwars/template-ui-kid.git
+	branch = carusel-images

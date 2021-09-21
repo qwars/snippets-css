@@ -140,9 +140,7 @@ export tag Header < h2
 
 	def render
 		<self>
-			<span>
-				<kbd> <svg:svg> <svg:use href="{ ISVG }#image">
-				<span contenteditable=true data-placeholder="Enter template name">
+			<span> <span contenteditable=true data-placeholder="Enter template name">
 			<dfn> <span contenteditable=true data-placeholder="Enter template description">
 			<blockquote>
 				<kbd :tap.toggleNavigation> <svg:svg> <svg:use href="{ ISVG }#bars">
