@@ -48,10 +48,12 @@ label
 		display: inline-flex
 		align-items: center
 	& > i, & > u
+		text-decoration: none
+		font-style: normal
 		border-top: var( --border ) !important
 		border-bottom: var( --border )  !important
-		padding-left: 1ex
 		transition: background .3s, border-color .3s, color .3s
+		padding-left: 1ex
 		& + legend
 			margin-left: 1.5rem
 		svg
@@ -104,6 +106,12 @@ label
 		&::-webkit-inner-spin-button
 			-webkit-appearance: none
 			margin: 0px
+
+		&[type=file]
+			position: fixed
+			top: -100vh
+			& + *
+				flex-grow: 1
 
 		&[type=number]
 			-moz-appearance:textfield

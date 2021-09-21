@@ -47,7 +47,7 @@ export tag Article < article
 					<dfn>
 					<aside>
 					<blockquote>
-						if params:document then <kbd :tap.toggleNavigate> <svg:svg> <svg:use href="{ ISVG }#bars">
+						if params:part then <kbd :tap.toggleNavigate> <svg:svg> <svg:use href="{ ISVG }#bars">
 						<label>
 							<input type="text" placeholder="Search { params:part or 'element store'}">
 							<i :tap.addSearchTags> <svg:svg> <svg:use href="{ ISVG }#search-plus">

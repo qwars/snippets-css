@@ -41,9 +41,7 @@ export tag Article < article
 		<self>
 
 			unless params:document then <h2>
-				<span>
-					<kbd :tap.createNewFolder> <svg:svg> <svg:use href="{ ISVG }#folder-plus">
-					"Templates"
+				<span> "Templates"
 				<dfn>
 				<aside>
 					<CreateButton :submit.createNewElement placeholder="templates">
