@@ -15,10 +15,10 @@ import Sketch as Header from './header'
 import Sketch as Main from './main'
 import Sketch as Footer from './footer'
 
-Imba.mount <Application route="/*:collection*/*:document*/*">
+Imba.mount <Application route="/*:collection*/*:part*/*:document*/*">
 
 Imba.mount <Header>
 
-Imba.mount <Main route="/:collection*/*:document*/*">
+Imba.mount <Main route="/:collection*/*:part*/*:document*/*">
 
 Imba.mount <Footer>

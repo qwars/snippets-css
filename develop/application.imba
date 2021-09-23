@@ -66,6 +66,35 @@ export tag Application < output
 	def testimony= dataset
 		@testimony.update( dataset ).catch( do |error| console.log 'error update testimony',  error )
 
+	# Методы работы с коллекциями и документами базы
+	def folders
+		testimony.collection('folders').orderBy('updatedAt', 'desc')
+			.where('tags', 'array-contains', [ params:collection ].concat( params:part or [] ) )
+
+	def createFolder datastate
+		datastate:createdAt = testimony:firestore:FieldValue.serverTimestamp
+		datastate:updatedAt = testimony:firestore:FieldValue.serverTimestamp
+		datastate:createdUid = testimony
+		datastate:tags = [ params:collection ].concat( params:part or [] )
+		testimony.collection('folders').add datastate
+
+	def document
+		if params:collection === 'stores' and params:document and params:part then firestore.collection( params:collection ).doc params:document or params:part
+		elif params:collection and params:part then testimony.collection( params:collection ).doc params:part
+
+	def createDocument datastate, callback
+		datastate:createdAt = testimony:firestore:FieldValue.serverTimestamp
+		datastate:updatedAt = testimony:firestore:FieldValue.serverTimestamp
+		datastate:createdUid = testimony
+		testimony.collection( params:collection ).add( datastate ).catch( invalidCompletion )
+			.then do router.go "/{ route.params:collection }/{ $1:id }" unless callback isa Function and callback $1
+
+	def updateDocument datastate, callback
+		datastate:updatedAt = testimony:firestore:FieldValue.serverTimestamp
+		datastate:updatedUid = testimony
+		document.update( datastate ).catch( invalidCompletion )
+			.then do callback isa Function and callback $1
+
 	def render
 		<self .authentication=!testimony .waiting=waiting>
 			if process:env:NODE_ENV === 'development' and params:collection === '-' then <SchemeUI>
