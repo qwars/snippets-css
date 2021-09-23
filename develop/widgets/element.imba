@@ -1,5 +1,7 @@
 import Widget as ImbaCodeMirror from './codemirror'
 
+const source-code = '###\n@TAGS: ["p","div","blockquote","address"]\n@text-block:\n\tTYPE: "WYSIWYG"\n\tlegend: "Display text "\n\ttitle: "Display text"\n\tdescription: "Display text"\n###\nprop text-block default: "Display text"\ndef render\n\t<self html=@text-block>'
+
 tag CreateSetting < form
 	prop type-settings
 	def render
@@ -13,36 +15,44 @@ tag CreateSetting < form
 			<button disabled=true> "Insert { type-settings }"
 
 export tag Header < h2
+
 	@classes = ['']
+
+	def mount
+		const changeVersionDocument = do|cm|
+			application.document.response:version = [0,0,0] unless application.document.response:version
+			cm:timeoutVersionChange = clearTimeout(cm:timeoutVersionChange) or setTimeout(&, 333 ) do render ++application.document.response:version[2]
+
+		let interval = setInterval( &, 0 ) do
+			@codemirror = parent and parent.querySelector( '.imba-codemirror' ).parent.@codemirror.@codemirror
+			@codemirror.on('change', changeVersionDocument.bind self ) if @codemirror and not clearInterval interval
+
 	def toggleAside t
 		unless mode
 			const aside = root.querySelector 'article + aside'
 			aside.flagIf 'active', t isa Boolean ? t : not aside.flags.contains 'active'
 
-	def codemirror
-		unless @codemirror then @codemirror = parent and parent.querySelector( '.imba-codemirror' ).parent.@codemirror.@codemirror
-		@codemirror
-
 	def toggleCodeMirror t
-		if codemirror
+		if @codemirror
 			toggleAside false
-			codemirror.setOption 'mode', t
-			codemirror.focus
+			@codemirror.setOption 'mode', t
+			@codemirror.focus
 
 	def mode
-		codemirror.getOption('mode') === 'css'
+		@codemirror.getOption('mode') === 'css'
 
 	def render
 		<self>
-			<span> <span contenteditable=true data-placeholder="Enter widget name">
-			<dfn> <span contenteditable=true data-placeholder="Enter widget description">
+			<span> <span contenteditable=true data-placeholder="Enter widget name"> application.document.response:displayName
+			<dfn>
+				<span contenteditable=true data-placeholder="Enter widget description">
 			<aside>
-				if codemirror
+				if @codemirror
 					<kbd.code-imba .active=!mode  :tap.toggleCodeMirror('imba')> <svg:svg> <svg:use href="{ ISVG }#code-imba">
 					<kbd.code-css .active=mode  :tap.toggleCodeMirror('css')> <svg:svg> <svg:use href="{ ISVG }#code-css">
-				<button.active disabled=true> "Save version: default"
+				<button.active disabled=true> "Save version: { ( application.document.response:version or [0,0,0] ).join '.' }"
 				<kbd> <svg:svg> <svg:use href="{ ISVG }#dolly-flatbed">
-				if codemirror then <kbd :tap.toggleAside> <svg:svg> <svg:use href="{ ISVG }#bars">
+				if @codemirror then <kbd :tap.toggleAside> <svg:svg> <svg:use href="{ ISVG }#bars">
 
 export tag Navigation < section
 	@classes = ['']
@@ -95,7 +105,14 @@ export tag Aside < section
 				<CreateSetting[ @new-method ] type-settings="Method">
 
 export tag Article < section
-	@classes = ['']
+	@classes = ['widget-editor']
+
+	prop default-state default:
+		sourceCode: source-code
+		sourceTag: 'div'
+		version: [0,0,0]
+
+
 	def render
 		<self>
 			<ImbaCodeMirror@codemirror>

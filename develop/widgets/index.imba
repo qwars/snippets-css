@@ -2,6 +2,7 @@
 import './index.styl'
 
 import Aside as ElementAside, Navigation as ElementNavigation, Article as ElementArticle, Header as ElementHeader from './element'
+import Article as Page404 from '../page404'
 import Widget as CreateButton from './create-button'
 
 tag ItemFigure < figure
@@ -32,8 +33,9 @@ export tag Article < article
 		@count += 1
 
 	def createNewElement e
-		e.target.waiting = Promise.new do|response|
-			setTimeout(&, 3000) do e.target.waiting = undefined
+		e.target.waiting = application.createDocument
+			Object.assign { displayName: e.data, folder: undefined }, ElementArticle:prototype.@_defaultState:default or {}
+			do e.target.waiting = undefined
 
 	def toggleNavigate
 		@nav-active = !@nav-active
@@ -41,7 +43,9 @@ export tag Article < article
 	def render
 		<self>
 			unless params:document then <h2>
-				<span> "Widgets"
+				<span>
+					<span> "Widgets"
+					<q> "Folder"
 				<dfn>
 				<aside>
 					<CreateButton :submit.createNewElement placeholder="widget">
@@ -50,22 +54,27 @@ export tag Article < article
 					<label>
 						<input type="text" placeholder="Search widgets">
 						<i :tap.addSearchTags> <svg:svg> <svg:use href="{ ISVG }#search-plus">
-			else <ElementHeader route="/widgets/:document">
+			elif application.document.response isa Object then <ElementHeader route="/widgets/:document">
 			unless params:document then <section.list-state>
 				<nav .active=@nav-active>
-					<ul> for item in Array @count or 0
-						<li>
-							<kbd> <svg:svg> <svg:use href="{ ISVG }#folder">
-							<span> "Random text Random text Random text Random text"
-							<aside>
-								<del.kbd> <svg:svg> <svg:use href="{ ISVG }#trash">
+					<label>
+						<input type="text" placeholder="Enter new folder name" required=true>
+						<i :tap.createNewFolder> <svg:svg> <svg:use href="{ ISVG }#folder-plus">
+					<ul>
+						for item in Array @count or 0
+							<li>
+								<kbd> <svg:svg> <svg:use href="{ ISVG }#folder">
+								<span> "Random text Random text Random text Random text"
+								<aside>
+									<del.kbd> <svg:svg> <svg:use href="{ ISVG }#trash">
 					<.trash-folder>
-						<kbd> <svg:svg> <svg:use href="{ ISVG }#folder-times">
+						<kbd> <svg:svg> <svg:use href="{ ISVG }#folder">
 						<span> "Trash"
 						<aside>
 							<kbd> <svg:svg> <svg:use href="{ ISVG }#trash-undo">
 							<del.kbd> <svg:svg> <svg:use href="{ ISVG }#trash">
-
 				<ul> for item in Array 20
 					<li> <ItemFigure>
-			else <ElementArticle route="/widgets/:document">
+			elif application.document.response isa Object then <ElementArticle route="/widgets/:document">
+			elif application.document.response === null then <Page404 route="/:collection/:document">
+			else <.loading>
