@@ -35,10 +35,16 @@ h1, h2
 	grid-template-columns: 1fr auto
 	font-size: 1.5em
 	gap: 1rem
+	& > span q
+		quotes: "\2237 " "";
+		display: flex
+		align-items: center
+		gap: 1ex
+		margin: 0px
 	& > :first-child
 		display: flex
 		align-items: center
-		gap: 1rem
+		gap: 1ex
 		& > [contenteditable]
 			flex-grow: 1
 	& > aside
@@ -204,41 +210,42 @@ samp
 
 em
 	font: var( --font-extra )
+	color: var( --extra-color )
 	&:not([class]):before
 		content: '🙷'
 		display: inline-block
 		color: var( --border-color )
 		font-size: 1.5rem
 		line-height: 0px
-		margin-right: .5rem
-		transform: translateY(.5rem)
-	&.announcement
+		margin-right: .2rem
+		transform: translateY(.51rem)
+	&.announcement, &.info
 		color: var( --info-color )
 		&:before
 			content: 'ⓘ'
 			display: inline-block
-			font-size: 1.2rem
+			font-size: 1.1rem
 			line-height: 0px
-			margin-right: .5rem
-			transform: translateY(.1rem)
+			margin-right: .2rem
+			transform: translateY(.05rem)
 
 	&.warning
 		color: var( --warning-color )
 		&:before
-			content: "🛎"
+			content: "☙"
 			display: inline-block
-			font-size: 1.2rem
+			font-size: 1.7rem
 			line-height: 0px
-			margin-right: .5rem
-			transform: translateY(.05rem)
+			margin-right: .2rem
+			transform: translateY(.3rem)
 	&.invalid
 		color: var( --invalid-color )
 		&:before
 			content: '🙹'
 			display: inline-block
-			font-size: 1.2rem
+			font-size: 1rem
 			line-height: 0px
-			margin-right: .5rem
+			margin-right: .2rem
 			transform: translateY(.05rem)
 
 @import './fieldset-style.styl'
