@@ -10,15 +10,17 @@ export tag Sketch < main
 	@classes = []
 	def render
 		<self>
-			<WidgetsNavigation route="/widgets/*:document*/*">
-			<WidgetsArticle route="/widgets/*:document*/*">
-			<WidgetsAside route="/widgets/*:document*/*">
-			<TemplatesNavigation route="/templates/*:document*/*">
-			<TemplatesArticle route="/templates/*:document*/*">
-			<TemplatesAside route="/templates/*:document*/*">
-			<ProjectsNavigation route="/projects/*:document*/*">
-			<ProjectsArticle route="/projects/*:document*/*">
-			<ProjectsAside route="/projects/*:document*/*">
-			<StoresNavigation route="/stores/*:part*/*:document*/*">
-			<StoresArticle route="/stores/*:part*/*:document*/*">
-			<StoresAside route="/stores/*:part*/*:document*/*">
+			unless application.testimony then <.loading>
+			else
+				<WidgetsNavigation route="/widgets/*:document*/*">
+				<WidgetsArticle route="/widgets/*:document*/*">
+				<WidgetsAside route="/widgets/*:document*/*">
+				<TemplatesNavigation route="/templates/*:document*/*">
+				<TemplatesArticle route="/templates/*:document*/*">
+				<TemplatesAside route="/templates/*:document*/*">
+				<ProjectsNavigation route="/projects/*:document*/*">
+				<ProjectsArticle route="/projects/*:document*/*">
+				<ProjectsAside route="/projects/*:document*/*">
+				<StoresNavigation route="/stores/*:part*/*:document*/*">
+				<StoresArticle route="/stores/*:part*/*:document*/*">
+				<StoresAside route="/stores/*:part*/*:document*/*">
