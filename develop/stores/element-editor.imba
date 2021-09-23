@@ -28,6 +28,7 @@ export tag Article < section
 
 	def render
 		<self>
+			console.log application.documnet
 			<section>
 				<CaruselImages :upload.uploadImage>
 				<h4> <dfn> "Description"
