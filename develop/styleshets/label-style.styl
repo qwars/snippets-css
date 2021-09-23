@@ -1,0 +1,183 @@
+
+[contenteditable]
+	border: var( --border )
+	cursor: text
+	&:hover:not(:focus):after
+		content: '\270E ...'
+		color: var( --extra-color )
+		font: var( --extra-color )
+		font-size: 1rem
+		line-height: 0%
+		display: inline-block
+		transform: rotate( 180deg ) translate( -1.5ex, -1ex) scale( 1.5 )
+	&:focus
+		border-color: var( --focus-color )
+
+[contenteditable][data-placeholder]:empty
+	color: var( --text-color )
+	transition: opacity .3s
+	display: inline-block
+	&:focus
+		opacity: 1
+		&:before
+			opacity: .3
+	&:hover
+		opacity: 1
+	&:before
+		content: attr(data-placeholder)
+		color: var( --extra-color )
+
+
+label
+	display: inline-flex
+	position: relative
+	align-items: stretch
+	flex-wrap: nowrap
+	flex-direction: row-reverse
+	box-sizing: border-box
+	min-height: 2rem
+	border-left:  var( --border )
+	border-right:  var( --border )
+	transition: background .3s, border-color .3s, color .3s
+	& > legend
+		position: absolute
+		left: 1em
+		font: var( --font-text )
+		transition: top .3s, background .3s,  color .3s, margin-left .3s
+	& > :not(input):not(datalist)
+		display: inline-flex
+		align-items: center
+	& > i, & > u
+		text-decoration: none
+		font-style: normal
+		border-top: var( --border ) !important
+		border-bottom: var( --border )  !important
+		transition: background .3s, border-color .3s, color .3s
+		padding-left: 1ex
+		& + legend
+			margin-left: 1.5rem
+		svg
+			pointer-events: none
+			width: 1rem
+			height: 1rem
+			transition: fill .3s
+	& input +  u
+		border: 1px solid var(--border-color) !important
+		border-left: none !important
+		border-right: none !important
+	input, textarea
+		min-height: 100%
+		align-self: stretch
+		flex-grow: 1
+		font: var( --font-text )
+		border: var( --border )
+		border-left: 0px solid transparent
+		border-right: 0px solid transparent
+		padding: 0px 1em
+		box-sizing: border-box
+		color: var( --text-color )
+		appearance: none
+		-moz-appearance: textfield
+		-webkit-appearance: none
+		-ms-appearance: none
+		-o-appearance: none
+		margin: 0px
+		box-shadow: none
+		transition: background .3s, border-color .3s, color .3s
+
+		&::-webkit-input-placeholder
+			color: var( --placeholder-color )
+		&::-moz-input-placeholder
+			color: var( --placeholder-color )
+		&::-ms-input-placeholder
+			color: var( --placeholder-color )
+		&::input-placeholder
+			color: var( --placeholder-color )
+		&:-webkit-input-placeholder
+			color: var( --placeholder-color )
+		&:-moz-input-placeholder
+			color: var( --placeholder-color )
+		&:-ms-input-placeholder
+			color: var( --placeholder-color )
+		&:input-placeholder
+			color: var( --placeholder-color )
+
+
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button
+			-webkit-appearance: none
+			margin: 0px
+
+		&[type=file]
+			position: fixed
+			top: -100vh
+			& + *
+				flex-grow: 1
+
+		&[type=number]
+			-moz-appearance:textfield
+			text-align: right
+			width: 0px
+			flex-grow: 1
+
+		&[type=checkbox]
+			-moz-appearance:textfield
+			max-width: 1rem
+			max-height: 1rem
+			min-width: 1rem
+			min-height: 1rem
+			padding: 0px
+			align-self: center
+			cursor: pointer
+			transition: background .3s
+			&:checked
+				background: var( --focus-color )
+
+		&:read-only
+			border-color: var( --checked-color )
+			color: var( --checked-color )
+
+		&:placeholder-shown:not(:focus) ~ legend
+			top: 0rem
+			bottom: 0rem
+			height: 2rem
+			color: var( --placeholder-color )
+
+
+		&:placeholder-shown:not(:focus) ~ i svg
+			fill: var( --placeholder-color )
+
+		&:not(:placeholder-shown) ~ i svg
+			fill: var(--active-color)
+
+		&:not(:placeholder-shown):not(:focus) ~ legend
+			top: -.6rem
+			background: var( --canvas-color )
+			margin-left: 0px
+
+		&:focus
+			border-color: var( --focus-color )
+			& ~ i, & ~ u
+				border-color: var( --focus-color ) !important
+				& svg
+					fill: var( --focus-color )
+			& ~ legend
+				top: -.6rem
+				background: var( --canvas-color )
+				color: var( --focus-color )
+
+		&:not(:placeholder-shown):invalid, &:focus:not(:placeholder-shown):invalid
+			color: var( --invalid-color )
+			border-color: var( --invalid-color )
+			& ~ legend
+				color: var( --invalid-color )
+
+	&:focus-within
+		border-color: var( --focus-color )
+		legend
+			border-color: var( --focus-color )
+		& > i + legend
+			margin-left: 0px
+
+	textarea
+		padding: .6rem 1em

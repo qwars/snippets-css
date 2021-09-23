@@ -9,3 +9,19 @@
 [submodule "develop/classes/firebase-google-cloud"]
 	path = develop/classes/firebase-google-cloud
 	url = git@github.com:qwars/firebase-google-cloud.git
+[submodule "develop/widgets/codemirror"]
+	path = develop/widgets/codemirror
+	url = git@github.com:qwars/template-ui-kid.git
+	branch = CodeMirror5
+[submodule "develop/widgets/create-button"]
+	path = develop/widgets/create-button
+	url = git@github.com:qwars/template-ui-kid.git
+	branch = create-button
+[submodule "develop/widgets/details-tooltype"]
+	path = develop/widgets/details-tooltype
+	url = git@github.com:qwars/template-ui-kid.git
+	branch = details-tooltype
+[submodule "develop/widgets/carusel-images"]
+	path = develop/widgets/carusel-images
+	url = git@github.com:qwars/template-ui-kid.git
+	branch = carusel-images

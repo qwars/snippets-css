@@ -1,0 +1,78 @@
+
+figure
+	border: var( --border )
+	background: var(--border-color)
+	margin: 0px
+	position: relative
+	box-sizing: border-box
+	display: grid
+	grid-template-rows: 1fr auto
+	grid-template-columns: 1fr
+	gap: 1rem
+	box-shadow: 0px 0px 0rem transparent
+	transition: box-shadow .3s, border-color .3s
+	& > aside
+		margin: 0px 1rem
+		display: grid
+		grid-template-rows: 1fr auto
+		gap: 1rem
+		dfn
+			padding-top: 1rem
+	& > del
+		position: absolute
+		right: 0px
+		top: 0px
+		color: var( --invalid-color )
+		display: flex
+		align-items: center
+		justify-content: center
+		width: 0rem
+		height: 0rem
+		opacity: 0
+		transition: opacity .3s
+		z-index: 1
+		cursor: pointer
+		&:before
+			content: "✖"
+			border: 1px solid var( --invalid-color )
+			background: var(--canvas-color)
+			border-radius: 1rem
+			width: 1rem
+			height: 1rem
+			min-width: 1rem
+			min-height: 1rem
+			display: flex
+			align-items: center
+			justify-content: center
+			box-sizing: border-box
+			font-size: .7rem
+			padding-left: .05rem
+			padding-bottom: .06rem
+	figcaption
+		display: grid
+		grid-template-rows: 3rem
+		grid-template-columns: auto 1fr auto
+		background: var(--canvas-color)
+		border-top: var( --border )
+		padding: 0px 1rem
+		gap: 1ex
+		& > abbr
+			width: 2rem
+		& > span
+			white-space: nowrap
+			text-overflow: ellipsis
+			overflow: hidden
+			display: flex
+			align-items: center
+			font: var( --font-title )
+			font-weight: bolder
+
+		& > aside
+			display: inline-flex
+			align-items: center
+
+	&:hover
+		border-color: var( --select-color )
+		box-shadow: 0px 0px 1rem var( --select-color )
+		& > del
+			opacity: 1

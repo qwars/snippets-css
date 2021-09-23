@@ -1,0 +1,254 @@
+
+:root
+	--border: 1px solid var( --border-color )
+
+:not(use):not(.active)[href]
+	cursor: pointer
+
+:not(use).active[href]
+	cursor: default
+
+blockquote
+	margin: 0px
+	padding: 1rem
+
+h1, h2, h3, h4, h5, h6
+	margin: 0px
+	color: var( --title-color )
+	font: var( --font-title )
+	[contenteditable]
+		border: 0px solid transparent
+	& > del
+		display: inline-flex
+		align-items: center
+		justify-content: center
+		cursor: pointer
+		color: var(--extra-color)
+		align-self: flex-start
+		&:before
+			content: "⊗"
+			font-size: 1.5rem
+			line-height: 1.85rem
+
+h1, h2
+	display: grid
+	grid-template-columns: 1fr auto
+	font-size: 1.5em
+	gap: 1rem
+	& > span q
+		quotes: "\2237 " "";
+		display: flex
+		align-items: center
+		gap: 1ex
+		margin: 0px
+	& > :first-child
+		display: flex
+		align-items: center
+		gap: 1ex
+		& > [contenteditable]
+			flex-grow: 1
+	& > aside
+		display: flex
+		align-items: center
+		gap: 1rem
+		button
+			padding: 0px 1rem
+	& > blockquote
+		display: grid
+		grid-template-columns: auto 1fr auto
+		padding: 0px
+		gap: 1rem
+		grid-area: 3/1/4/3
+		& > section
+			grid-area: 1/2/2/3
+			display: flex
+			align-items: center
+			gap: 1rem
+		& > aside
+			grid-area: 1/3/2/4
+			display: inline-flex
+			align-items: center
+			gap: 1rem
+		& > label
+			grid-area: 1/2/2/3
+		& > label:first-child
+			grid-area: 1/1/2/4
+		& > aside ~ label:first-child
+			grid-area: 1/1/2/3
+		& > dfn
+			grid-area: 2/1/3/3
+	& > dfn
+		grid-area: 2/1/3/3
+		&:empty
+			display: none
+			& ~ blockquote
+				grid-area: 2/1/3/3
+
+hr
+	border: 0px solid transparent
+	height: 1px
+	background: var( --border-color )
+	box-sizing: border-box
+
+hr[data-step]
+	display: flex
+	height: 1px
+	align-items: center
+	border: 0px solid transparent
+	background: var( --border-color )
+	overflow: visible
+	padding: 0px 1rem
+	margin: 1.5rem 0px
+	position: relative
+	&:not([open]) + :not(hr)
+		display: none
+
+	& > aside
+		position: absolute
+		right: 0px
+		border: var( --border )
+		height: 1rem
+		min-width: 1rem
+		border-radius: 1rem
+		padding: 0px .5rem
+		margin: 0px 1rem
+		display: flex
+		align-items: center
+		justify-content: center
+		background: var( --canvas-color )
+		box-sizing: border-box;
+
+	& > legend
+		background: var( --canvas-color )
+		padding: 0px 1rem
+		font-size: 1rem
+		line-height: 1rem
+		cursor: pointer
+	&:before
+		content: attr(data-step)
+		border: var( --border )
+		height: 1rem
+		min-width: 1rem
+		border-radius: 1rem
+		padding: 0px .5rem
+		box-sizing: border-box;
+		margin-right: 1rem
+		display: flex
+		align-items: center
+		justify-content: center
+		background: var( --canvas-color )
+		line-height: 1px
+
+mark
+	background: transparent
+	border: var( --border )
+
+a
+	text-decoration: none
+	color: var( --link-color )
+	&.active, &:active, &.active *, &:active *
+		color: var( --active-color )
+	&.not-active
+		color: var( --link-color )
+	&:not(.active):hover, &:not(.active):hover *,
+	&.not-active:hover, &.not-active:hover *
+		color: var( --hover-color )
+
+.not-active
+	color: var( --link-color ) !important
+
+del
+	text-decoration: none
+	&:hover
+		color: var( --invalid-color ) !important
+
+kbd, .kbd
+	display: inline-flex
+	align-items: center
+	justify-content: center
+	color: var( --extra-color )
+	cursor: pointer
+	transition: color .3s
+	position: relative
+	&:hover
+		color: var( --hover-color )
+	&:active, &.active
+		color: var( --active-color )
+	& > svg
+		width: 2rem
+		height: 2rem
+		overflow: visible
+		fill: currentColor
+		pointer-events: none
+		& > use:last-child
+			width: 100%
+			height: 100%
+
+abbr
+	display: inline-flex
+	align-items: center
+	justify-content: center
+
+dfn
+	color: var( --extra-color )
+	font: var( --font-text )
+
+svg
+	overflow: visible
+	width: 100%
+	height: 100%
+
+q
+	margin: 0px 1ex
+	display: inline-block
+
+samp
+	font: var( --font-mono )
+	color: var( --extra-color )
+	& > q
+		quotes: "'" "'"
+
+em
+	font: var( --font-extra )
+	color: var( --extra-color )
+	&:not([class]):before
+		content: '🙷'
+		display: inline-block
+		color: var( --border-color )
+		font-size: 1.5rem
+		line-height: 0px
+		margin-right: .2rem
+		transform: translateY(.51rem)
+	&.announcement, &.info
+		color: var( --info-color )
+		&:before
+			content: 'ⓘ'
+			display: inline-block
+			font-size: 1.1rem
+			line-height: 0px
+			margin-right: .2rem
+			transform: translateY(.05rem)
+
+	&.warning
+		color: var( --warning-color )
+		&:before
+			content: "☙"
+			display: inline-block
+			font-size: 1.7rem
+			line-height: 0px
+			margin-right: .2rem
+			transform: translateY(.3rem)
+	&.invalid
+		color: var( --invalid-color )
+		&:before
+			content: '🙹'
+			display: inline-block
+			font-size: 1rem
+			line-height: 0px
+			margin-right: .2rem
+			transform: translateY(.05rem)
+
+@import './fieldset-style.styl'
+@import './label-style.styl'
+@import './button-style.styl'
+@import './figure-style.styl'

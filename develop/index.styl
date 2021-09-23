@@ -5,6 +5,15 @@
   --font-extra: normal normal 300 normal 13px / normal -apple-system, "Segoe UI", system-ui, Roboto, "Noto Sans", "Helvetica Neue", sans-serfi
   --font-mono: normal normal 300 normal 11px / normal SFMono-Regular, Menlo, Monaco, Consolas,  "Nimbus Mono L", "Tlwg Mono", "Ubuntu Mono", "Liberation Mono", "Courier New", monospace
 
+
+@media (prefers-color-scheme: light)
+	@import './styleshets/light-scheme-theme.styl'
+
+@media (prefers-color-scheme: dark)
+	@import './styleshets/dark-scheme-theme.styl'
+
+@import './styleshets/default-tags-style.styl'
+
 html
 	min-height: 100vh
 	margin: 0px
@@ -20,18 +29,21 @@ body
 	min-height: 100vh
 	min-width: 642px
 	font: var( --font-text )
+	gap: 1rem
 	& > *
 		place-self: stretch
 	::selection
 		box-shadow: none
 		outline: 0px solid transparent
+		background: var( --select-color )
+		color: white
 	:focus
 		box-shadow: none
 		outline: 0px solid transparent
-	// ::-internal-autofill-selected:hover,
-	// ::-internal-autofill-selected:focus,
-	// ::-internal-autofill-selected:active
-	// 	background-color: var( --canvas-color,  ) !important
+	::-internal-autofill-selected:hover,
+	::-internal-autofill-selected:focus,
+	::-internal-autofill-selected:active
+		background-color: var( --canvas-color,  ) !important
 
 @keyframes spin
 	50%

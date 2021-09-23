@@ -1,0 +1,43 @@
+
+button
+	border: 2px solid transparent
+	margin: 0px
+	padding: 0px
+	color: var( --extra-color )
+	min-height: 2rem
+	transition: background .3s, border-color .3s, color .3s
+	display: flex
+	align-items: center
+	justify-content: center
+	position: relative
+	&:not( :disabled )
+		cursor: pointer
+		&.active
+			background: var( --active-color )
+			color: var( --canvas-color )
+		&:hover
+			background: var( --hover-color )
+			color: var( --canvas-color )
+
+		&:active
+			background: var( --active-color )
+			color: var( --canvas-color )
+
+		&:focus
+			background: var( --focus-color )
+			color: var( --canvas-color )
+		&.waiting
+			background: var( --focus-color )
+			color: var( --canvas-color )
+			&:before
+				content: '\2744'
+				animation: spin 3s linear infinite
+				position: absolute
+				left: .4ex
+
+	&:disabled
+		background: var( --border-color )
+		color: var( --text-color )
+
+	&:empty
+		display: none

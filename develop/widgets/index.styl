@@ -1,0 +1,50 @@
+
+article > section.widget-editor
+	margin-left: -1rem
+
+.imba-codemirror
+	grid-area: 1/1/2/3
+	place-self: stretch
+	display: grid
+	grid-template-columns: 1fr
+	grid-template-rows: 1fr
+	box-sizing: border-box
+	position: relative
+	overflow: auto
+	.CodeMirror
+		min-height: 100%
+		.CodeMirror-hscrollbar
+			visibility: hidden
+.code-imba svg
+	width: 5rem
+.code-imba svg
+	width: 3rem
+
+.CreateSetting
+	z-index: 1
+	display: flex
+	flex-direction: column
+	gap: 1rem
+	height: 0px
+	overflow: hidden
+	transition: height .3s, padding .3s
+	textarea
+		overflow: hidden
+		resize: none
+	label + label
+		flex-grow: 1
+hr.create-form
+	margin-bottom: 0px
+	& > aside
+		background-color: var( --link-color )
+		kbd
+			color: var( --canvas-color )
+			transform: rotate( 45deg )
+			transition: transform .3s
+	& + section form.CreateSetting
+		margin: 1rem 0px
+		padding-top: 1rem
+		height: 12rem
+		textarea
+			overflow: auto
+			resize: none

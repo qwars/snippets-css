@@ -4,3 +4,59 @@ header
 	align-items: center
 	justify-content: space-between
 	gap: 1rem
+	padding: .5rem 1rem
+	box-sizing: border-box
+	& > nav
+		flex-grow: 1
+		display: flex
+		align-items: center
+		gap: 1rem
+		& > s
+			flex-grow: 1
+		[href*="store"]
+			display: inline-flex
+			align-items: center
+			justify-content: flex-end
+			gap: 1rem
+			position: relative
+			div
+				display: flex
+				align-items: center
+				justify-content: flex-end
+				gap: 1rem
+				overflow: hidden
+				width: 0px
+				transition: width .3s
+				&:before
+					content: ""
+					flex-grow: 1
+					width: 100%
+			&.active a:not( .active ), &:hover a:not(.active)
+				color: var( --link-color ) !important
+			&:hover div
+				width: 100%
+	& > a
+		font-size: .8rem
+		display: flex
+		align-items: center
+		@media (max-width: 690px)
+			& dfn
+				display: none
+		& > *
+			cursor: pointer
+		dfn
+			transform: translateX( -.8rem )
+		svg
+			width: 1.5rem
+			height: 1.5rem
+			fill: var( --disabled-color )
+	& > aside, a[href*="office"]
+		display: flex
+		align-items: center
+		gap: 1rem
+		@media (max-width: 690px)
+			&[href*="office"] > span
+				display: none
+
+	a[href*="office"] img
+		border-radius: .3rem
