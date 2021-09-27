@@ -150,6 +150,7 @@ a
 		color: var( --active-color )
 	&.not-active
 		color: var( --link-color )
+		cursor: pointer !important
 	&:not(.active):hover, &:not(.active):hover *,
 	&.not-active:hover, &.not-active:hover *
 		color: var( --hover-color )
@@ -247,6 +248,16 @@ em
 			line-height: 0px
 			margin-right: .2rem
 			transform: translateY(.05rem)
+
+abbr
+	display: flex
+	align-items: center
+	gap: 1ex
+	color: var( --visited-color )
+	svg
+		width: 1rem
+		height: 1rem
+		fill: currentColor
 
 @import './fieldset-style.styl'
 @import './label-style.styl'

@@ -71,12 +71,16 @@ export tag Application < output
 		testimony.collection('folders').orderBy('updatedAt', 'desc')
 			.where('tags', 'array-contains', [ params:collection ].concat( params:part or [] ) )
 
+	def removeFolder ref
+		testimony.collection( params:collection ).where( 'folder', '==', ref ).catch( invalidCompletion )
+			.then do|response| ref.delete if response.docs.map( do|item| item.ref.update( { foleders: item.data:folders } ).catch( invalidCompletion ) if item.data:folders.splice( item.data:folders.indexOf( ref ), 1 ) )
+
 	def createFolder datastate
 		datastate:createdAt = testimony:firestore:FieldValue.serverTimestamp
 		datastate:updatedAt = testimony:firestore:FieldValue.serverTimestamp
 		datastate:createdUid = testimony
 		datastate:tags = [ params:collection ].concat( params:part or [] )
-		testimony.collection('folders').add datastate
+		testimony.collection('folders').add( datastate ).catch( invalidCompletion )
 
 	def document
 		if params:collection === 'stores' and params:document and params:part then firestore.collection( params:collection ).doc params:document or params:part

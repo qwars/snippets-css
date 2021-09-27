@@ -10,4 +10,4 @@ export tag Article < section
 			<section>
 				<em>
 					<span> "Page not found "
-					<a route-to="{params:path.replace /\w+$/, '#return'}"> "Go to parent"
+					<a.not-active route-to="/{params:collection}/{ params:collection === 'stores' and  params:part or '' }"> "Go to parent"

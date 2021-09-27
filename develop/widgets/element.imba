@@ -2,6 +2,37 @@ import Widget as ImbaCodeMirror from './codemirror'
 
 const source-code = '###\n@TAGS: ["p","div","blockquote","address"]\n@text-block:\n\tTYPE: "WYSIWYG"\n\tlegend: "Display text "\n\ttitle: "Display text"\n\tdescription: "Display text"\n###\nprop text-block default: "Display text"\ndef render\n\t<self html=@text-block>'
 
+tag DraggableStateLayer < section
+
+	def ontouchstart touch
+		self
+
+	def ontouchmove touch
+		if touch.sourceTarget.flags.contains 'move-point' then css
+			top: touch.y - touch.sourceTarget.dom:clientHeight * 1.5
+			left: touch.x - touch.sourceTarget.dom:clientWidth * 1.5
+			right: 'auto'
+			bottom: 'auto'
+
+tag ImbaDebugState < kbd
+
+	def toggleActive
+		@active = !@active
+
+	def render
+		<self .active=@active :tap.toggleActive>
+			<svg:svg> <svg:use href="{ ISVG }#eye">
+			<DraggableStateLayer>
+				<aside>
+					<kbd.move-point> <svg:svg> <svg:use href="{ ISVG }#move-layer">
+					<abbr>
+						<svg:svg> <svg:use href="{ ISVG }#eye">
+						<span> "View and analysis of the status widget"
+				<div>
+					<hr>
+					<iframe>
+					<hr>
+
 tag CreateSetting < form
 	prop type-settings
 	def render
@@ -25,7 +56,7 @@ export tag Header < h2
 
 		let interval = setInterval( &, 0 ) do
 			@codemirror = parent and parent.querySelector( '.imba-codemirror' ).parent.@codemirror.@codemirror
-			@codemirror.on('change', changeVersionDocument.bind self ) if @codemirror and not clearInterval interval
+			render @codemirror.on('change', changeVersionDocument.bind self ) if @codemirror and not clearInterval interval
 
 	def toggleAside t
 		unless mode
@@ -50,6 +81,7 @@ export tag Header < h2
 				if @codemirror
 					<kbd.code-imba .active=!mode  :tap.toggleCodeMirror('imba')> <svg:svg> <svg:use href="{ ISVG }#code-imba">
 					<kbd.code-css .active=mode  :tap.toggleCodeMirror('css')> <svg:svg> <svg:use href="{ ISVG }#code-css">
+					<ImbaDebugState>
 				<button.active disabled=true> "Save version: { ( application.document.response:version or [0,0,0] ).join '.' }"
 				<kbd> <svg:svg> <svg:use href="{ ISVG }#dolly-flatbed">
 				if @codemirror then <kbd :tap.toggleAside> <svg:svg> <svg:use href="{ ISVG }#bars">

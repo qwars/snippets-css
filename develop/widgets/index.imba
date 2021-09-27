@@ -32,6 +32,9 @@ export tag Article < article
 		@count = 0 unless @count
 		@count += 1
 
+	def removeFolder ref
+		application.removeFolder ref
+
 	def createNewElement e
 		e.target.waiting = application.createDocument
 			Object.assign { displayName: e.data, folder: undefined }, ElementArticle:prototype.@_defaultState:default or {}
@@ -58,15 +61,15 @@ export tag Article < article
 			unless params:document then <section.list-state>
 				<nav .active=@nav-active>
 					<label>
-						<input type="text" placeholder="Enter new folder name" required=true>
+						<input type="text" placeholder="Enter new folder name" required=true :kewdown.enter.createNewFolder>
 						<i :tap.createNewFolder> <svg:svg> <svg:use href="{ ISVG }#folder-plus">
 					<ul>
 						for item in Array @count or 0
 							<li>
 								<kbd> <svg:svg> <svg:use href="{ ISVG }#folder">
-								<span> "Random text Random text Random text Random text"
+								<span> item.displayName
 								<aside>
-									<del.kbd> <svg:svg> <svg:use href="{ ISVG }#trash">
+									<del.kbd :tap.removeFolder( item:ref )> <svg:svg> <svg:use href="{ ISVG }#trash">
 					<.trash-folder>
 						<kbd> <svg:svg> <svg:use href="{ ISVG }#folder">
 						<span> "Trash"

@@ -48,3 +48,54 @@ hr.create-form
 		textarea
 			overflow: auto
 			resize: none
+
+.ImbaDebugState > section
+	position: fixed
+	z-index: -10
+	bottom: 2rem
+	right: 20rem
+	font: var( --font-text )
+	min-height: 25vh
+	min-width: 25vw
+	padding: 1rem
+	box-sizing: border-box
+	box-shadow: 0px 0px 1.5rem -0.5rem var( --border-color, GrayText )
+	border-radius: 1rem
+	display: flex
+	flex-direction: column
+	gap: 1rem
+	opacity: 0
+	transition: opacity .5s
+	& > div
+		flex-grow: 1
+		display: grid
+		grid-template-rows: auto 1fr auto
+		padding: 1rem
+		position: relative
+		iframe
+			align-self: stretch
+			border: 0px solid transparent
+		hr
+			margin: 0px -1rem
+			&:before
+				content: ""
+				position: absolute
+				top: 0px
+				bottom: 0px
+				width: 1px
+				background: var( --border-color )
+			&:first-child:before
+				left: 1rem
+			&:last-child:before
+				right: 1rem
+	& > aside
+		display: flex
+		gap: 1rem
+		kbd
+			cursor: move
+		svg
+			width: 1rem
+			height: 1rem
+.ImbaDebugState.active > section
+	z-index: 100
+	opacity: 1
