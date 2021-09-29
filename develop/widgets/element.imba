@@ -2,6 +2,15 @@ import Widget as ImbaCodeMirror from './codemirror'
 
 const source-code = '###\n@TAGS: ["p","div","blockquote","address"]\n@text-block:\n\tTYPE: "WYSIWYG"\n\tlegend: "Display text "\n\ttitle: "Display text"\n\tdescription: "Display text"\n###\nprop text-block default: "Display text"\ndef render\n\t<self html=@text-block>'
 
+tag CompilerImbaCSS < iframe
+
+	def setData v
+		console.dir dom
+		self
+
+	def render
+		<self>
+
 tag DraggableStateLayer < section
 
 	def ontouchstart touch
@@ -22,7 +31,7 @@ tag ImbaDebugState < kbd
 	def render
 		<self .active=@active :tap.toggleActive>
 			<svg:svg> <svg:use href="{ ISVG }#eye">
-			<DraggableStateLayer>
+			<DraggableStateLayer :tap.stop>
 				<aside>
 					<kbd.move-point> <svg:svg> <svg:use href="{ ISVG }#move-layer">
 					<abbr>
@@ -30,7 +39,7 @@ tag ImbaDebugState < kbd
 						<span> "View and analysis of the status widget"
 				<div>
 					<hr>
-					<iframe>
+					<CompilerImbaCSS[ data ]>
 					<hr>
 
 tag CreateSetting < form
@@ -82,6 +91,7 @@ export tag Header < h2
 					<kbd.code-imba .active=!mode  :tap.toggleCodeMirror('imba')> <svg:svg> <svg:use href="{ ISVG }#code-imba">
 					<kbd.code-css .active=mode  :tap.toggleCodeMirror('css')> <svg:svg> <svg:use href="{ ISVG }#code-css">
 					<ImbaDebugState>
+					console.log @codemirror.getOption('mode')
 				<button.active disabled=true> "Save version: { ( application.document.response:version or [0,0,0] ).join '.' }"
 				<kbd> <svg:svg> <svg:use href="{ ISVG }#dolly-flatbed">
 				if @codemirror then <kbd :tap.toggleAside> <svg:svg> <svg:use href="{ ISVG }#bars">
