@@ -57,6 +57,8 @@ export tag Application < output
 			message: Messages[ e:message ] or e:message
 
 	# testimony - аутентифицированный пользователь, ссылка на документ с данными пользователя
+	def signOut
+		authentication.signOut
 	def profile
 		authentication:_profile
 

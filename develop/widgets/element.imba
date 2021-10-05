@@ -1,11 +1,24 @@
 import Widget as ImbaCodeMirror from './codemirror'
+import Widget as Details from './details-tooltype'
 
 const source-code = '###\n@TAGS: ["p","div","blockquote","address"]\n@text-block:\n\tTYPE: "WYSIWYG"\n\tlegend: "Display text "\n\ttitle: "Display text"\n\tdescription: "Display text"\n###\nprop text-block default: "Display text"\ndef render\n\t<self html=@text-block>'
+
+tag TagSetting < label
+	prop defv default: ['address', 'p', 'div']
+	
+	def render
+		<self>
+			<datalist#Imba-HTML-TAGS> for item in Imba:HTML_TAGS
+				<option> item
+			<input[ @defv ] type="email" list="Imba-HTML-TAGS" placeholder="div" required>
+			<span> "TAG: "
+			<i> <svg:svg> <svg:use href="{ ISVG }#move-layer">
+			<u> <svg:svg> <svg:use href="{ ISVG }#move-layer">
 
 tag CompilerImbaCSS < iframe
 
 	def setData v
-		console.dir dom
+		# console.dir dom
 		self
 
 	def render
@@ -44,15 +57,19 @@ tag ImbaDebugState < kbd
 
 tag CreateSetting < form
 	prop type-settings
+
 	def render
 		<self>
 			<label>
-				<input type="text" placeholder=" ">
+				<input[data:name] type="text" placeholder=" " required pattern='^[a-zA-Z_][0-9a-zA-Z-_]*$'>
 				<legend> "Enter name { type-settings }"
 			<label>
-				<textarea placeholder=" ">
+				<input[data:title] type="text" placeholder=" " required>
+				<legend> "Enter display name { type-settings }"
+			<label>
+				<textarea[data:description] placeholder=" " required>
 				<legend> "Enter description { type-settings }"
-			<button disabled=true> "Insert { type-settings }"
+			<button disabled=!dom.checkValidity .active=dom.checkValidity> "Insert { type-settings }"
 
 export tag Header < h2
 
@@ -87,11 +104,11 @@ export tag Header < h2
 			<dfn>
 				<span contenteditable=true data-placeholder="Enter widget description">
 			<aside>
-				if @codemirror
+				if @codemirror and application.document.response and application.document.response:sourceCode and application.document.response:sourceCode.match /def\srender/
 					<kbd.code-imba .active=!mode  :tap.toggleCodeMirror('imba')> <svg:svg> <svg:use href="{ ISVG }#code-imba">
 					<kbd.code-css .active=mode  :tap.toggleCodeMirror('css')> <svg:svg> <svg:use href="{ ISVG }#code-css">
 					<ImbaDebugState>
-					console.log @codemirror.getOption('mode')
+				<TagSetting>
 				<button.active disabled=true> "Save version: { ( application.document.response:version or [0,0,0] ).join '.' }"
 				<kbd> <svg:svg> <svg:use href="{ ISVG }#dolly-flatbed">
 				if @codemirror then <kbd :tap.toggleAside> <svg:svg> <svg:use href="{ ISVG }#bars">
@@ -115,17 +132,17 @@ export tag Aside < section
 
 	def togglrFormCreateProperty v
 		const hr = querySelector 'hr[data-step="🅥"]'
-		@new-property = not hr.flags.contains( 'create-form' ) and v
+		@new-property = not hr.flags.contains( 'create-form' ) and Object.assign {},  v
 		hr.flagIf 'create-form', not hr.flags.contains 'create-form'
 
 	def togglrFormCreateEvent v
 		const hr = querySelector 'hr[data-step="🅔"]'
-		@new-event = not hr.flags.contains( 'create-form' ) and v
+		@new-event = not hr.flags.contains( 'create-form' ) and Object.assign {},  v
 		hr.flagIf 'create-form', not hr.flags.contains 'create-form'
 
 	def togglrFormCreateMethod v
 		const hr = querySelector 'hr[data-step="🅜"]'
-		@new-method = not hr.flags.contains( 'create-form' ) and v
+		@new-method = not hr.flags.contains( 'create-form' ) and Object.assign {},  v
 		hr.flagIf 'create-form', not hr.flags.contains 'create-form'
 
 	def render
@@ -137,7 +154,7 @@ export tag Aside < section
 				<CreateSetting[ @new-property ] type-settings="Property">
 			<hr data-step="🅔" open=true>
 				<legend> "Events"
-				<aside> <kbd  :tap.togglrFormCreateEvent(  @_new-event:default )> "+"
+				<aside> <kbd  :tap.togglrFormCreateEvent( @_new-event:default )> "+"
 			<section>
 				<CreateSetting[ @new-event ] type-settings="Event">
 			<hr data-step="🅜" open=true>
@@ -158,3 +175,4 @@ export tag Article < section
 	def render
 		<self>
 			<ImbaCodeMirror@codemirror>
+			# console.log 'compiler', @codemirror.compiler if @codemirror.compiler

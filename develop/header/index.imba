@@ -7,6 +7,9 @@ export tag Sketch < header
 	def displayName
 		@displayName or @displayName = application.profile and application.profile:displayName or application.profile:email.replace /(.+?)\@(.+)/, do "@{$2}"
 
+	def signOut
+		application.signOut.then do router.go '/'
+
 	def render
 		<self>
 			<a route-to="/">
@@ -28,4 +31,4 @@ export tag Sketch < header
 					if application.profile
 						<span> application.profile:displayName or application.profile:email.replace /(.+?)\@(.+)/, do "@{$2}"
 						<abbr> <img src=( application.profile:photoURL or "https://eightbitavatar.herokuapp.com/?id={application.profile:uid}&s=male&size=32" )>
-				<kbd> <svg:svg> <svg:use href="{ ISVG }#sign-out">
+				<kbd :tap.signOut> <svg:svg> <svg:use href="{ ISVG }#sign-out">

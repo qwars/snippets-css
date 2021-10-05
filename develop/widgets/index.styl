@@ -31,7 +31,7 @@ article > section.widget-editor
 	textarea
 		overflow: hidden
 		resize: none
-	label + label
+	label:nth-child(3)
 		flex-grow: 1
 hr.create-form
 	margin-bottom: 0px
@@ -44,7 +44,7 @@ hr.create-form
 	& + section form.CreateSetting
 		margin: 1rem 0px
 		padding-top: 1rem
-		height: 12rem
+		height: 15rem
 		textarea
 			overflow: auto
 			resize: none
@@ -99,3 +99,7 @@ hr.create-form
 .ImbaDebugState.active > section
 	z-index: 100
 	opacity: 1
+
+.TagSetting input
+	max-width: 6.8rem
+	text-transform: uppercase
