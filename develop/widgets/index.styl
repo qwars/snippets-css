@@ -34,9 +34,14 @@ article > section.widget-editor
 	label:nth-child(3)
 		flex-grow: 1
 hr.create-form
-	margin-bottom: 0px
+	&[open]
+		margin-bottom: 0px
+	&:not( [open] ) > aside
+		opacity: 0
+		z-index: -1
 	& > aside
 		background-color: var( --link-color )
+		transition: opacity .3s
 		kbd
 			color: var( --canvas-color )
 			transform: rotate( 45deg )
@@ -48,6 +53,35 @@ hr.create-form
 		textarea
 			overflow: auto
 			resize: none
+
+.search-tag
+	margin-left: .5rem
+	display: flex
+	input
+		padding-left: 2rem
+		text-transform: uppercase
+		& + i
+			cursor: pointer
+			margin-right: -1.5rem
+	& ~ ul
+		list-style: none
+		margin: 1rem 0px
+		padding: 0px
+		li
+			text-transform: uppercase
+			display: flex
+			align-items: center
+			height: 1.5rem
+			span
+				flex-grow: 1
+			del
+				color: var(--extra-color)
+				transition: color .3s
+				cursor: pointer
+				&:hover
+					color: var(--warning-color)
+				&:active
+					color: var(--invalid-color)
 
 .ImbaDebugState > section
 	position: fixed

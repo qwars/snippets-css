@@ -3,18 +3,6 @@ import Widget as Details from './details-tooltype'
 
 const source-code = '###\n@TAGS: ["p","div","blockquote","address"]\n@text-block:\n\tTYPE: "WYSIWYG"\n\tlegend: "Display text "\n\ttitle: "Display text"\n\tdescription: "Display text"\n###\nprop text-block default: "Display text"\ndef render\n\t<self html=@text-block>'
 
-tag TagSetting < label
-	prop defv default: ['address', 'p', 'div']
-	
-	def render
-		<self>
-			<datalist#Imba-HTML-TAGS> for item in Imba:HTML_TAGS
-				<option> item
-			<input[ @defv ] type="email" list="Imba-HTML-TAGS" placeholder="div" required>
-			<span> "TAG: "
-			<i> <svg:svg> <svg:use href="{ ISVG }#move-layer">
-			<u> <svg:svg> <svg:use href="{ ISVG }#move-layer">
-
 tag CompilerImbaCSS < iframe
 
 	def setData v
@@ -108,7 +96,6 @@ export tag Header < h2
 					<kbd.code-imba .active=!mode  :tap.toggleCodeMirror('imba')> <svg:svg> <svg:use href="{ ISVG }#code-imba">
 					<kbd.code-css .active=mode  :tap.toggleCodeMirror('css')> <svg:svg> <svg:use href="{ ISVG }#code-css">
 					<ImbaDebugState>
-				<TagSetting>
 				<button.active disabled=true> "Save version: { ( application.document.response:version or [0,0,0] ).join '.' }"
 				<kbd> <svg:svg> <svg:use href="{ ISVG }#dolly-flatbed">
 				if @codemirror then <kbd :tap.toggleAside> <svg:svg> <svg:use href="{ ISVG }#bars">
@@ -132,34 +119,67 @@ export tag Aside < section
 
 	def togglrFormCreateProperty v
 		const hr = querySelector 'hr[data-step="🅥"]'
+		hr.open = true
 		@new-property = not hr.flags.contains( 'create-form' ) and Object.assign {},  v
 		hr.flagIf 'create-form', not hr.flags.contains 'create-form'
 
 	def togglrFormCreateEvent v
 		const hr = querySelector 'hr[data-step="🅔"]'
+		hr.open = true
 		@new-event = not hr.flags.contains( 'create-form' ) and Object.assign {},  v
 		hr.flagIf 'create-form', not hr.flags.contains 'create-form'
 
 	def togglrFormCreateMethod v
 		const hr = querySelector 'hr[data-step="🅜"]'
+		hr.open = true
 		@new-method = not hr.flags.contains( 'create-form' ) and Object.assign {},  v
 		hr.flagIf 'create-form', not hr.flags.contains 'create-form'
 
+	def addTag e
+		if Imba:HTML_TAGS.includes e.target.value.toLocaleLowerCase
+			application.document.response:sourceTag = [ e.target.value.toLowerCase ].concat application.document.response:sourceTag or []
+			e.target.value = ''
+	def deleteTag item
+		application.document.response:sourceTag.splice application.document.response:sourceTag.indexOf( item ), 1
+
+	def checkValidityTag e
+		unless Imba:HTML_TAGS.includes e.target.value.toLowerCase then e.target.pattern = '\d+'
+		else e.target.pattern = '.+'
+
+	def toggleLayer e
+		let parent = e.target
+		if parent:open isa Function then parent.open = !parent.open
+		else until parent:open isa Function
+			parent = parent.parent
+			break parent.open = !parent.open if parent:open isa Function
+
 	def render
 		<self>
-			<hr data-step="🅥" open=true>
+			<hr data-step="🅣" open=true :tap.toggleLayer>
+				<legend> "Tag(s)"
+			<section>
+				<label.search-tag>
+					<input type="text" list="Imba-HTML-TAGS" placeholder="div" :change.addTag :input.checkValidityTag>
+					<i> <svg:svg> <svg:use href="{ ISVG }#search-plus">
+				<datalist#Imba-HTML-TAGS> for item in Imba:HTML_TAGS when application.document.response and not ( application.document.response:sourceTag and application.document.response:sourceTag.includes item )
+					<option> item
+				if application.document.response then <ul> for item in application.document.response:sourceTag
+					<li>
+						<span> item
+						<del :tap.deleteTag( item )> "⨂"
+			<hr data-step="🅥" open=true :tap.toggleLayer>
 				<legend> "Propertis"
-				<aside> <kbd :tap.togglrFormCreateProperty( @_new-property:default )> "+"
+				<aside> <kbd :tap.stop.togglrFormCreateProperty( @_new-property:default )> "+"
 			<section>
 				<CreateSetting[ @new-property ] type-settings="Property">
-			<hr data-step="🅔" open=true>
+			<hr data-step="🅔" open=true :tap.toggleLayer>
 				<legend> "Events"
-				<aside> <kbd  :tap.togglrFormCreateEvent( @_new-event:default )> "+"
+				<aside> <kbd  :tap.stop.togglrFormCreateEvent( @_new-event:default )> "+"
 			<section>
 				<CreateSetting[ @new-event ] type-settings="Event">
-			<hr data-step="🅜" open=true>
+			<hr data-step="🅜" open=true :tap.toggleLayer>
 				<legend> "Methods"
-				<aside> <kbd :tap.togglrFormCreateMethod( @_new-method:default )> "+"
+				<aside> <kbd :tap.stop.togglrFormCreateMethod( @_new-method:default )> "+"
 			<section>
 				<CreateSetting[ @new-method ] type-settings="Method">
 
