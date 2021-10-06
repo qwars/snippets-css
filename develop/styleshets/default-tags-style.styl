@@ -71,6 +71,10 @@ h1, h2
 			gap: 1rem
 		& > label
 			grid-area: 1/2/2/3
+			input
+				padding-left: 2rem
+				& + i
+					margin-right: -1.5rem
 		& > label:first-child
 			grid-area: 1/1/2/4
 		& > aside ~ label:first-child
@@ -150,6 +154,7 @@ a
 		color: var( --active-color )
 	&.not-active
 		color: var( --link-color )
+		cursor: pointer !important
 	&:not(.active):hover, &:not(.active):hover *,
 	&.not-active:hover, &.not-active:hover *
 		color: var( --hover-color )
@@ -247,6 +252,16 @@ em
 			line-height: 0px
 			margin-right: .2rem
 			transform: translateY(.05rem)
+
+abbr
+	display: flex
+	align-items: center
+	gap: 1ex
+	color: var( --visited-color )
+	svg
+		width: 1rem
+		height: 1rem
+		fill: currentColor
 
 @import './fieldset-style.styl'
 @import './label-style.styl'

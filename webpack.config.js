@@ -29,6 +29,8 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
+            'process.env.CODEMIRROR_LINT': JSON.stringify(['css', 'imba', 'html']),
+            // 'process.env.CODEMIRROR_LINT': JSON.stringify(['css','imba','html','json','coffeescript','javascript','yaml']),
             'process.env.API_KEYS': process.env.GITHUB_RUN_ID ? {
                 apiKey: JSON.stringify(process.env.APP_API_KEY),
                 authDomain: JSON.stringify(process.env.APP_AUTH_DOMAIN),

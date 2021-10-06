@@ -31,12 +31,17 @@ article > section.widget-editor
 	textarea
 		overflow: hidden
 		resize: none
-	label + label
+	label:nth-child(3)
 		flex-grow: 1
 hr.create-form
-	margin-bottom: 0px
+	&[open]
+		margin-bottom: 0px
+	&:not( [open] ) > aside
+		opacity: 0
+		z-index: -1
 	& > aside
 		background-color: var( --link-color )
+		transition: opacity .3s
 		kbd
 			color: var( --canvas-color )
 			transform: rotate( 45deg )
@@ -44,7 +49,91 @@ hr.create-form
 	& + section form.CreateSetting
 		margin: 1rem 0px
 		padding-top: 1rem
-		height: 12rem
+		height: 15rem
 		textarea
 			overflow: auto
 			resize: none
+
+.search-tag
+	margin-left: .5rem
+	display: flex
+	input
+		padding-left: 2rem
+		text-transform: uppercase
+		& + i
+			cursor: pointer
+			margin-right: -1.5rem
+	& ~ ul
+		list-style: none
+		margin: 1rem 0px
+		padding: 0px
+		li
+			text-transform: uppercase
+			display: flex
+			align-items: center
+			height: 1.5rem
+			span
+				flex-grow: 1
+			del
+				color: var(--extra-color)
+				transition: color .3s
+				cursor: pointer
+				&:hover
+					color: var(--warning-color)
+				&:active
+					color: var(--invalid-color)
+
+.ImbaDebugState > section
+	position: fixed
+	z-index: -10
+	bottom: 2rem
+	right: 20rem
+	font: var( --font-text )
+	min-height: 25vh
+	min-width: 25vw
+	padding: 1rem
+	box-sizing: border-box
+	box-shadow: 0px 0px 1.5rem -0.5rem var( --border-color, GrayText )
+	border-radius: 1rem
+	display: flex
+	flex-direction: column
+	gap: 1rem
+	opacity: 0
+	transition: opacity .5s
+	& > div
+		flex-grow: 1
+		display: grid
+		grid-template-rows: auto 1fr auto
+		padding: 1rem
+		position: relative
+		iframe
+			align-self: stretch
+			border: 0px solid transparent
+		hr
+			margin: 0px -1rem
+			&:before
+				content: ""
+				position: absolute
+				top: 0px
+				bottom: 0px
+				width: 1px
+				background: var( --border-color )
+			&:first-child:before
+				left: 1rem
+			&:last-child:before
+				right: 1rem
+	& > aside
+		display: flex
+		gap: 1rem
+		kbd
+			cursor: move
+		svg
+			width: 1rem
+			height: 1rem
+.ImbaDebugState.active > section
+	z-index: 100
+	opacity: 1
+
+.TagSetting input
+	max-width: 6.8rem
+	text-transform: uppercase
