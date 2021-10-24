@@ -137,3 +137,25 @@ hr.create-form
 .TagSetting input
 	max-width: 6.8rem
 	text-transform: uppercase
+
+.type-settings-Property
+	display: flex
+	align-items: center
+	justify-content: space-between
+	summary
+		text-transform: uppercase
+		& + ul
+			margin: 0px
+			padding: 0px
+			list-style: none
+			border-radius: .3rem
+			overflow: hidden
+			li
+				padding: 0px 1rem
+				cursor: pointer
+				&.active
+					background: var(--checked-color)
+					color: white
+					cursor: default
+				&:not(.active):hover
+					background: var(--border-color)
