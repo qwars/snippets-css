@@ -5,9 +5,18 @@ const source-code = '###\n@TAGS: ["p","div","blockquote","address"]\n@text-block
 
 tag CompilerImbaCSS < iframe
 
-	def setData v
-		# console.dir dom
-		self
+	# def setData code
+	# 	if dom:contentDocument
+	# 		# # fn(dom:contentDocument:body)
+	# 		let Tag = code.match( /defineTag\(\'(\w+)\'/ )[1];
+	# 		code = "(function(ELM)\{ var { code.substring( code.indexOf '_1' ) } \} )()";
+	# 		console.log code
+	# 		console.log Function( code )()
+			
+	# 		# # let fn = Function('ELM', "return function(ELM)\{{code}\}");
+
+	# 		# Imba.mount Tag, dom:contentDocument:body
+	# 	self
 
 	def render
 		<self>
@@ -40,11 +49,25 @@ tag ImbaDebugState < kbd
 						<span> "View and analysis of the status widget"
 				<div>
 					<hr>
-					<CompilerImbaCSS[ data ]>
+					<CompilerImbaCSS[ data:js ]>
 					<hr>
 
 tag CreateSetting < form
 	prop type-settings
+
+	def build
+		@editors = [
+			"STRING"
+			"NUMBER"
+			"BOOLEAN"
+			"DATE"
+			"RANGE"
+			"FILE"
+			"LIST"
+		]
+
+	def changeType v
+		data:type = v unless Imba.root.dom.click
 
 	def render
 		<self>
@@ -57,20 +80,35 @@ tag CreateSetting < form
 			<label>
 				<textarea[data:description] placeholder=" " required>
 				<legend> "Enter description { type-settings }"
+			if @type-settings === 'Property' then <section.type-settings-Property>
+				<span>  "Type editor property: "
+				<Details>
+					<summary.is-select> data:type
+					<ul> for item in @editors
+						<li .active=( data:type === item ) :tap.changeType(item)> item
+			elif @type-settings === 'Event' then <section.type-settings-Event>
+			elif @type-settings === 'Methods' then <section.type-settings-Methods>
 			<button disabled=!dom.checkValidity .active=dom.checkValidity> "Insert { type-settings }"
 
 export tag Header < h2
+	prop current-version default: [0,0,0]
+
+	def setup
+		@latest = application.document.collection('versions').orderBy('updatedAt', 'desc').limit(1).response
 
 	@classes = ['']
 
 	def mount
+		if application.document.response:version then @current-version = application.document.response:version.slice
+		else application.document.response:version = @current-version.slice
 		const changeVersionDocument = do|cm|
-			application.document.response:version = [0,0,0] unless application.document.response:version
+			if cm.getOption('mode') === 'imba' then application.document.response:sourceCode = cm.getValue
+			else application.document.response:sourceStyle = cm.getValue
 			cm:timeoutVersionChange = clearTimeout(cm:timeoutVersionChange) or setTimeout(&, 333 ) do render ++application.document.response:version[2]
 
 		let interval = setInterval( &, 0 ) do
-			@codemirror = parent and parent.querySelector( '.imba-codemirror' ).parent.@codemirror.@codemirror
-			render @codemirror.on('change', changeVersionDocument.bind self ) if @codemirror and not clearInterval interval
+			@codemirror = parent and parent.querySelector( '.imba-codemirror' ).parent.@codemirror
+			render @codemirror.cm.on('change', changeVersionDocument.bind self ) if @codemirror and not clearInterval interval
 
 	def toggleAside t
 		unless mode
@@ -80,11 +118,23 @@ export tag Header < h2
 	def toggleCodeMirror t
 		if @codemirror
 			toggleAside false
-			@codemirror.setOption 'mode', t
-			@codemirror.focus
+			@codemirror.cm.setOption 'mode', t
+			@codemirror.cm.focus
 
 	def mode
-		@codemirror.getOption('mode') === 'css'
+		@codemirror.@codemirror.getOption('mode') === 'css'
+
+	def saveDocumentState e
+		@waiting = application.updateDocument application.document.response, do @waiting = false
+
+	def latest
+		@latest and @latest[0]
+
+	def isActiveSave
+		@current-version.toString === application.document.response:version.toString
+
+	def itTagMode
+		@codemirror and @codemirror.cm:compiled and @codemirror.cm:compiled:imba and @codemirror.cm:compiled:imba:options and @codemirror.cm:compiled:imba:options:filename === 'Tag'
 
 	def render
 		<self>
@@ -92,12 +142,15 @@ export tag Header < h2
 			<dfn>
 				<span contenteditable=true data-placeholder="Enter widget description">
 			<aside>
-				if @codemirror and application.document.response and application.document.response:sourceCode and application.document.response:sourceCode.match /def\srender/
+				if itTagMode
 					<kbd.code-imba .active=!mode  :tap.toggleCodeMirror('imba')> <svg:svg> <svg:use href="{ ISVG }#code-imba">
 					<kbd.code-css .active=mode  :tap.toggleCodeMirror('css')> <svg:svg> <svg:use href="{ ISVG }#code-css">
-					<ImbaDebugState>
-				<button.active disabled=true> "Save version: { ( application.document.response:version or [0,0,0] ).join '.' }"
-				<kbd> <svg:svg> <svg:use href="{ ISVG }#dolly-flatbed">
+					<ImbaDebugState[ @codemirror.cm:compiled:imba ]>
+				if application.document.response:version
+					<button.active.it-save-typo .waiting=@waiting :tap.saveDocumentState
+						disabled=isActiveSave>
+							"Save version: { ( application.document.response:version or [0,0,0] ).join '.' }"
+					<kbd> <svg:svg> <svg:use href="{ ISVG }#dolly-flatbed">
 				if @codemirror then <kbd :tap.toggleAside> <svg:svg> <svg:use href="{ ISVG }#bars">
 
 export tag Navigation < section
@@ -110,12 +163,15 @@ export tag Aside < section
 	prop new-property default:
 		name: ''
 		title: ''
+		type: 'STRING'
 	prop new-event default:
 		name: ''
 		title: ''
+		type: 'DEF'
 	prop new-method default:
 		name: ''
 		title: ''
+		type: 'DEF'
 
 	def togglrFormCreateProperty v
 		const hr = querySelector 'hr[data-step="🅥"]'
@@ -190,7 +246,6 @@ export tag Article < section
 		sourceCode: source-code
 		sourceTag: 'div'
 		version: [0,0,0]
-
 
 	def render
 		<self>
