@@ -59,6 +59,7 @@ h1, h2
 		padding: 0px
 		gap: 1rem
 		grid-area: 3/1/4/3
+		font: var(--font-text)
 		& > section
 			grid-area: 1/2/2/3
 			display: flex
@@ -179,6 +180,14 @@ kbd, .kbd
 		color: var( --hover-color )
 	&:active, &.active
 		color: var( --active-color )
+
+	&.announcement, &.info
+		color: var( --info-color )
+	&.warning
+		color: var( --warning-color )
+	&.invalid
+		color: var( --invalid-color )
+
 	& > svg
 		width: 2rem
 		height: 2rem
