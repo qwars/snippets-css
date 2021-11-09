@@ -4,6 +4,7 @@ import './index.styl'
 import Aside as ElementAside, Navigation as ElementNavigation, Article as ElementArticle, Header as ElementHeader from './element'
 import Article as Page404 from '../page404'
 import Widget as CreateButton from './create-button'
+import Widget as PaginationFrestoreCollection from './pagination-frestore-collection'
 
 tag ItemFigure < figure
 	def render
@@ -28,9 +29,10 @@ export tag Article < article
 	def addSearchTags
 		@tags
 
-	def createNewFolder
-		@count = 0 unless @count
-		@count += 1
+	def createNewFolder e
+		# 'Simple Tags'
+		e.target.parent.children[0].dom:validity:valid and application.createFolder({ displayName: e.target.parent.children[0].value })
+			.then do render e.target.parent.children[0].value = ''
 
 	def removeFolder ref
 		application.removeFolder ref
@@ -45,7 +47,7 @@ export tag Article < article
 
 	def render
 		<self>
-			unless params:document then <h2>
+			unless params:documen then <h2>
 				<span>
 					<span> "Widgets"
 					<q> "Folder"
@@ -60,24 +62,26 @@ export tag Article < article
 			elif application.document.response isa Object then <ElementHeader route="/widgets/:document">
 			unless params:document then <section.list-state>
 				<nav .active=@nav-active>
-					<label>
-						<input type="text" placeholder="Enter new folder name" required=true :kewdown.enter.createNewFolder>
+					<label.search-tag-event>
+						<input type="text" placeholder="Enter new folder name" required=true :keydown.enter.createNewFolder>
 						<i :tap.createNewFolder> <svg:svg> <svg:use href="{ ISVG }#folder-plus">
-					<ul>
-						for item in Array @count or 0
-							<li>
+					unless application.folders.response then <.loading>
+					else <ul>
+						for item in Array(4).fill application.folders.response[0]
+							<li .active=(item:id === application.collection) title=item.data:displayName :tap.selectFolder(item)>
 								<kbd> <svg:svg> <svg:use href="{ ISVG }#folder">
-								<span> item.displayName
+								<span> item.data:displayName
 								<aside>
-									<del.kbd :tap.removeFolder( item:ref )> <svg:svg> <svg:use href="{ ISVG }#trash">
+									<del.kbd :tap.stop.removeFolder( item:ref )> <svg:svg> <svg:use href="{ ISVG }#trash">
 					<.trash-folder>
 						<kbd> <svg:svg> <svg:use href="{ ISVG }#folder">
 						<span> "Trash"
 						<aside>
 							<kbd> <svg:svg> <svg:use href="{ ISVG }#trash-undo">
 							<del.kbd> <svg:svg> <svg:use href="{ ISVG }#trash">
-				<ul> for item in Array 20
+				<ul> for item in application.collection.response
 					<li> <ItemFigure>
+				<PaginationFrestoreCollection[ application.collection ]>
 			elif application.document.response isa Object then <ElementArticle route="/widgets/:document">
 			elif application.document.response === null then <Page404 route="/:collection/:document">
 			else <.loading>
