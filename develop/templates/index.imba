@@ -2,6 +2,9 @@ import './index.styl'
 
 import Aside as ElementAside, Navigation as ElementNavigation, Article as ElementArticle, Header as ElementHeader from './element'
 import Widget as CreateButton from '../widgets/create-button'
+import Widget as PaginationFrestoreCollection from '../widgets/pagination-frestore-collection'
+
+const EmptyDataCollection = require '../images/empty-data-collection.svg'
 
 tag ItemFigure < figure
 	def render
@@ -55,6 +58,9 @@ export tag Article < article
 
 			unless params:document then <section.list-state>
 				<nav .active=@nav-active>
+					<label.search-tag-event>
+						<input type="text" placeholder="Enter new folder name" required=true :kewdown.enter.createNewFolder>
+						<i :tap.createNewFolder> <svg:svg> <svg:use href="{ ISVG }#folder-plus">
 					<ul> for item in Array @count or 0
 						<li>
 							<kbd> <svg:svg> <svg:use href="{ ISVG }#folder">
@@ -67,7 +73,11 @@ export tag Article < article
 						<aside>
 							<kbd> <svg:svg> <svg:use href="{ ISVG }#trash-undo">
 							<del.kbd> <svg:svg> <svg:use href="{ ISVG }#trash">
-
-				<ul> for item in Array 20
+				unless @pagination and @pagination.collection.response isa Array then <.loading>
+				elif @pagination.collection.response:length === 0 then <div.is-empty-list-data>
+					<abbr> <svg:svg> <svg:use href="{ EmptyDataCollection }#empty-data-collection">
+					<em.announcement> "You have not created templates yet, do it right now"
+				else <ul> for item in @pagination.collection.response
 					<li> <ItemFigure>
+				<PaginationFrestoreCollection[ application.collection ]@pagination>
 			else <ElementArticle route="/templates/:document">
