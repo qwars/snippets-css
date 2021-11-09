@@ -25,3 +25,14 @@
 	path = develop/widgets/carusel-images
 	url = git@github.com:qwars/template-ui-kid.git
 	branch = carusel-images
+[submodule "develop/classes/create-mount-imba-tags"]
+	path = develop/classes/create-mount-imba-tags
+	url = git@github.com:qwars/template-ui-kid.git
+	branch = create-mount-imba-tags
+[submodule "assets/mdnDocs"]
+	path = assets/mdnDocs
+	url = https://github.com/mdn/content.git
+[submodule "develop/widgets/pagination-frestore-collection"]
+	path = develop/widgets/pagination-frestore-collection
+	url = git@github.com:qwars/template-ui-kid.git
+	branch = pagination-frestore-collection
