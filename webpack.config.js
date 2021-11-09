@@ -64,6 +64,17 @@ module.exports = {
     module: {
 	rules: [
             {
+                test: /\.md$/,
+                use: [
+                    {
+                        loader: "html-loader",
+                    },
+                    {
+                        loader: "markdown-loader",
+                    },
+                ],
+            },
+            {
                 test: /\.m?js$/,
                 exclude: /(node_modules|bower_components|javascripts)/,
                 use: {
