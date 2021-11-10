@@ -81,7 +81,7 @@ export tag Application < output
 		datastate:createdAt = testimony:firestore:FieldValue.serverTimestamp
 		datastate:updatedAt = testimony:firestore:FieldValue.serverTimestamp
 		datastate:createdUid = testimony
-		datastate:tags = [ params:collection ].concat( params:part or [] )
+		datastate:tags = [ params:collection, ( params:document or params:part ) and self.document:ref ].filter do !!$1
 		testimony.collection('folders').add( datastate ).catch( invalidCompletion )
 
 	def collection

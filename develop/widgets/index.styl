@@ -76,6 +76,15 @@ hr.create-form
 			transform: translateX(1rem)
 			width: 16rem
 			cursor: pointer
+			&.active
+				color: var(--active-color)
+				font-weight: bolder
+				kbd, .kbd
+					color: var(--active-color)
+				& del
+					pointer-events: none
+					visibility: hidden
+					cursor: default
 			span
 				flex-grow: 1
 				overflow: hidden

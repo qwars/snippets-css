@@ -29,13 +29,19 @@ export tag Article < article
 	def addSearchTags
 		@tags
 
-	def createNewFolder
-		@count = 0 unless @count
-		@count += 1
+	def createNewFolder e
+		e.target.parent.children[0].dom:validity:valid and application.createFolder({ displayName: e.target.parent.children[0].value })
+			.then do render e.target.parent.children[0].value = ''
+
+	def selectFolder item
+		@folder = item
+
+	def removeFolder item
+		@folder = item
 
 	def createNewElement e
-		e.target.waiting = Promise.new do|response|
-			setTimeout(&, 3000) do e.target.waiting = undefined
+		e.target.parent.children[0].dom:validity:valid and application.createFolder({ displayName: e.target.parent.children[0].value, tags: [ @folder ? @folder:ref : null ] })
+			.then do render e.target.parent.children[0].value = ''
 
 	def toggleNavigate
 		@nav-active = !@nav-active
@@ -44,7 +50,10 @@ export tag Article < article
 		<self>
 
 			unless params:document then <h2>
-				<span> "Templates"
+				<span>
+					"Templates"
+					<s> "::" if @folder or @folder === null
+					<ins :tap.selectFolder(undefined)> <span :tap.stop.prevent> @folder ? @folder.data:displayName : "Unsorted" if @folder or @folder === null
 				<dfn>
 				<aside>
 					<CreateButton :submit.createNewElement placeholder="templates">
@@ -59,14 +68,18 @@ export tag Article < article
 			unless params:document then <section.list-state>
 				<nav .active=@nav-active>
 					<label.search-tag-event>
-						<input type="text" placeholder="Enter new folder name" required=true :kewdown.enter.createNewFolder>
+						<input type="text" placeholder="Enter new folder name" required=true :keydown.enter.createNewFolder>
 						<i :tap.createNewFolder> <svg:svg> <svg:use href="{ ISVG }#folder-plus">
-					<ul> for item in Array @count or 0
-						<li>
+					<ul>
+						if application.testimony.response and application.testimony.response:templates > 0 then <li .active=( @folder === null ) :tap.selectFolder(null)>
 							<kbd> <svg:svg> <svg:use href="{ ISVG }#folder">
-							<span> "Random text Random text Random text Random text"
-							<aside>
-								<del.kbd> <svg:svg> <svg:use href="{ ISVG }#trash">
+							<span> "Unsorted"
+						for item in application.folders.response
+							<li .active=( @folder and @folder:id === item:id ) :tap.selectFolder(item)>
+								<kbd> <svg:svg> <svg:use href="{ ISVG }#folder">
+								<span> item.data:displayName
+								<aside>
+									<del.kbd :tap.stop.removeFolder(item)> <svg:svg> <svg:use href="{ ISVG }#trash">
 					<.trash-folder>
 						<kbd> <svg:svg> <svg:use href="{ ISVG }#folder-times">
 						<span> "Trash"
