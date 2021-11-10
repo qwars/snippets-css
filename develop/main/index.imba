@@ -5,6 +5,8 @@ import Aside as WidgetsAside, Navigation as WidgetsNavigation, Article as Widget
 import Aside as TemplatesAside, Navigation as TemplatesNavigation, Article as TemplatesArticle from '../templates'
 import Aside as ProjectsAside, Navigation as ProjectsNavigation, Article as ProjectsArticle from '../projects'
 import Aside as StoresAside, Navigation as StoresNavigation, Article as StoresArticle from '../stores'
+import Article as Page404 from '../page404'
+
 
 export tag Sketch < main
 	@classes = []

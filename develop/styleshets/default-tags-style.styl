@@ -35,6 +35,9 @@ h1, h2
 	grid-template-columns: 1fr auto
 	font-size: 1.5em
 	gap: 1rem
+	ins
+		border-color: transparent !important
+		padding: 0px !important
 	& > span q
 		quotes: "\2237 " "";
 		display: flex
@@ -59,6 +62,7 @@ h1, h2
 		padding: 0px
 		gap: 1rem
 		grid-area: 3/1/4/3
+		font: var(--font-text)
 		& > section
 			grid-area: 1/2/2/3
 			display: flex
@@ -179,6 +183,14 @@ kbd, .kbd
 		color: var( --hover-color )
 	&:active, &.active
 		color: var( --active-color )
+
+	&.announcement, &.info
+		color: var( --info-color )
+	&.warning
+		color: var( --warning-color )
+	&.invalid
+		color: var( --invalid-color )
+
 	& > svg
 		width: 2rem
 		height: 2rem
@@ -262,6 +274,34 @@ abbr
 		width: 1rem
 		height: 1rem
 		fill: currentColor
+
+ins
+	text-decoration: none
+	display: inline-flex
+	padding: 0px .3ex 0px 1ex
+	box-sizing: border-box
+	border-radius: 1rem
+	border: var(--border)
+	border-color: transparent
+	span
+		pointer-events: none
+	&:hover
+		border-color: var(--border-color)
+		&:after
+			content: "⮿"
+			color: var(--extra-color)
+			display: inline-flex
+			align-items: center
+			line-height: 0px
+			margin-left: 1ex
+			transform: translateY(.2rem)
+			cursor: pointer
+
+s
+	text-decoration: none
+	display: inline-flex
+	align-items: center
+	justify-content: center
 
 @import './fieldset-style.styl'
 @import './label-style.styl'

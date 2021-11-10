@@ -71,7 +71,7 @@ export tag Application < output
 	# Методы работы с коллекциями и документами базы
 	def folders
 		testimony.collection('folders').orderBy('updatedAt', 'desc')
-			.where('tags', 'array-contains', [ params:collection ].concat( params:part or [] ) )
+			.where('tags', 'array-contains', params:collection )
 
 	def removeFolder ref
 		testimony.collection( params:collection ).where( 'folder', '==', ref ).catch( invalidCompletion )
@@ -81,12 +81,16 @@ export tag Application < output
 		datastate:createdAt = testimony:firestore:FieldValue.serverTimestamp
 		datastate:updatedAt = testimony:firestore:FieldValue.serverTimestamp
 		datastate:createdUid = testimony
-		datastate:tags = [ params:collection ].concat( params:part or [] )
+		datastate:tags = [ params:collection, ( params:document or params:part ) and self.document:ref ].filter do !!$1
 		testimony.collection('folders').add( datastate ).catch( invalidCompletion )
+
+	def collection
+		if params:collection === 'stores' then firestore.collection( params:collection ).limit(20).orderBy 'updatedAt', 'desc'
+		elif params:collection then testimony.collection( params:collection ).limit(20).orderBy 'updatedAt', 'desc'
 
 	def document
 		if params:collection === 'stores' and params:document and params:part then firestore.collection( params:collection ).doc params:document or params:part
-		elif params:collection and params:part then testimony.collection( params:collection ).doc params:part
+		elif params:collection and params:part then testimony.collection( params:collection ).doc params:document or params:part
 
 	def createDocument datastate, callback
 		datastate:createdAt = testimony:firestore:FieldValue.serverTimestamp

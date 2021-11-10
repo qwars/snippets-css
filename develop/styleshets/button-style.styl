@@ -26,14 +26,22 @@ button
 		&:focus
 			background: var( --focus-color )
 			color: var( --canvas-color )
+		&.invalid
+			background: var( --invalid-color )
+		&.it-save-typo
+			&:before
+				content: '\2BB3'
+				transform: translateY(.3ex)
+				margin-right: 1ex
+				margin-left: -.7ex
 		&.waiting
 			background: var( --focus-color )
 			color: var( --canvas-color )
 			&:before
 				content: '\2744'
 				animation: spin 3s linear infinite
-				position: absolute
-				left: .4ex
+				margin-right: 1ex
+				margin-left: -.7ex
 
 	&:disabled
 		background: var( --border-color )
